@@ -1,0 +1,335 @@
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1442px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.VideoGrid {
+  margin-bottom: 100px;
+}
+
+.Grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-gap: 16px;
+
+  /* justify-content: space-between; */
+}
+
+.HomePage {
+  width: 100%;
+}
+
+.VideoBox {
+}
+
+.VideoBox > img {
+  width: 100%;
+}
+
+.VideoBox > img:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+
+.VideoBox > h1 {
+  font-size: 16px;
+  margin: 0px;
+}
+
+.VideoBox > p {
+  margin: 0px;
+  color: grey;
+}
+
+/* NAVBAR */
+
+.NavBar {
+  background-color: #0d3f69;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.navContainer {
+  /* max-width: 1000px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: red;
+  margin-right: auto;
+  margin-left: auto; */
+
+  width: 1442px;
+
+  /* margin-right: auto;
+  margin-left: auto; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-left: 16px;
+
+  color: white;
+}
+
+.left-nav {
+  display: flex;
+  align-items: center;
+  width: 70%;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+.brand {
+  font-weight: bold;
+}
+
+.brand:hover {
+  color: white !important;
+}
+
+.right-nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 16px;
+  width: 20%;
+}
+
+.left-nav > b {
+  margin-right: 25px;
+}
+
+.left-nav > a {
+  margin: 0 25px 0 0;
+}
+
+.left-nav > a,
+.left-nav > button {
+}
+
+.iFrame {
+  width: 100%;
+  height: 1000px;
+}
+
+.VideoPlayer {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.video-con {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.video-con iframe,
+.video-con object,
+.video-con embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.video-description {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-description > h1 {
+  margin: 0px;
+}
+
+.right-description {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.right-description > button {
+  margin-left: 16px;
+}
+
+.description-sub {
+  display: flex;
+  margin-top: 5px;
+  color: grey;
+}
+.video-description > h1,
+p {
+  margin: 0px;
+}
+
+.ratings {
+  display: flex;
+}
+
+.ratings > div {
+  margin-right: 16px;
+}
+
+.box-rating {
+  display: flex;
+  color: grey;
+}
+
+.box-rating > p {
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+.box-rating > i {
+  margin-right: 6px;
+}
+
+.grid-heading {
+  display: flex;
+}
+
+.grid-heading > h3 {
+  margin-right: 16px;
+  padding: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.logo {
+  height: 50px;
+}
+
+.left-nav > a {
+  display: flex;
+  align-items: center;
+}
+
+a:hover {
+  color: grey;
+}
+
+.left-nav > a {
+  color: white;
+}
+
+.left-nav > a:hover {
+  color: grey;
+}
+
+.search-box {
+  height: 20px;
+  /* width: 100%; */
+}
+
+.search {
+  width: 100%;
+}
+
+.search-items {
+  position: absolute;
+  background-color: white;
+  color: black;
+  width: 100%;
+  border: solid black 1px;
+  z-index: 999;
+  max-width: 216px;
+}
+
+.search-item {
+  border-bottom: 1px grey solid;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  padding: 5px;
+}
+
+.search-item:hover {
+  background-color: #ededed;
+  cursor: pointer;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.fa-caret-down {
+  margin-left: 5px;
+}
+
+.google {
+  margin-left: 16px;
+}
+
+.fa-search {
+  color: white;
+}
+
+.fa-search:hover {
+  cursor: pointer;
+}
+
+.rating-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 10px;
+}
