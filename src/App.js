@@ -37,13 +37,15 @@ const App = () => {
     console.log("Getting credntials...");
     console.log(typeof googleId);
 
+    console.log("#" + googleId);
+
     if (googleId == "undefined") {
       console.log("No credentials");
-      //setCredentials("");
+      setCredentials("");
       return;
     } else {
       console.log("Found credentialss");
-      //setCredentials(googleId);
+      setCredentials(googleId);
     }
   }
 
