@@ -21,8 +21,8 @@ import config from "react-global-configuration";
 config.set({
   backend_url:
     window.location.hostname == "localhost"
-      ? "https://www.therugbyvault.com/"
-      : "https://www.therugbyvault.com/"
+      ? "https://rhysmaiden.pythonanywhere.com/"
+      : "https://rhysmaiden.pythonanywhere.com/"
 });
 
 const App = () => {
