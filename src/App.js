@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-import NavBar from "./NavBar.js";
+import NavBar from "./NavBar_v2.js";
 import SearchBar from "./Search.js";
 import MainPlayer from "./MainPlayer.js";
 import VideoGrid from "./VideoGrid.js";
