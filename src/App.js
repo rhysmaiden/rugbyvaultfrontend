@@ -13,16 +13,18 @@ import PlayerPage from "./PlayerPage.js";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import Chart from "./Chart.js";
 import Rating from "react-rating";
+import TryProcessingPage from "./TryProcessingPage.js";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import config from "react-global-configuration";
 
+
 config.set({
   backend_url:
     window.location.hostname == "localhost"
-      ? "https://rhysmaiden.pythonanywhere.com/"
-      : "https://rhysmaiden.pythonanywhere.com/"
+      ? "http://127.0.0.1:8000/"
+      : "http://127.0.0.1:8000/"
 });
 
 const App = () => {
@@ -84,6 +86,7 @@ const App = () => {
           <Route path="/team/:id?" component={TeamPage} />
           <Route path="/player/:id?" component={PlayerPage} />
           <Route path="/chart/:type?" component={Chart} />
+          <Route path="/tryprocessing/:id?" component={TryProcessingPage} />
           {/* <Route path="/player/:show_id?/:episode_id?" component={Player} /> */}
         </Router>
 

@@ -400,6 +400,35 @@ li > a:hover {
   display: block;
 }
 
+.try-times {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  max-width: 500px;
+}
+
+.form-heading {
+  text-align: center;
+  font-size: 12px;
+}
+
+.form-name {
+  font-size: 12px;
+}
+
+.without_ampm::-webkit-datetime-edit-ampm-field {
+  display: none;
+}
+input[type="time"]::-webkit-clear-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  margin: -10px;
+}
+
 /* Tablet menu */
 
 @media all and (min-width: 486px) {
