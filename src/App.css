@@ -411,6 +411,8 @@ li > a:hover {
 .form-heading {
   text-align: center;
   font-size: 12px;
+
+  font-weight: bold;
 }
 
 .form-name {
@@ -427,6 +429,17 @@ input[type="time"]::-webkit-clear-button {
   -ms-appearance: none;
   appearance: none;
   margin: -10px;
+}
+
+.errorDiv {
+  text-align: center;
+}
+
+.submitButton {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 10px;
+  height: 40px;
 }
 
 /* Tablet menu */
