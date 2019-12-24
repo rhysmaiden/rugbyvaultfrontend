@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-import NavBar from "./NavBar_v2.js";
+import NavBar from "./NavBar.js";
 import SearchBar from "./Search.js";
 import MainPlayer from "./MainPlayer.js";
 import VideoGrid from "./VideoGrid.js";
@@ -18,7 +18,6 @@ import TryProcessingPage from "./TryProcessingPage.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import config from "react-global-configuration";
-
 
 config.set({
   backend_url:

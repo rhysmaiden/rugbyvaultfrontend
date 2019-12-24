@@ -65,6 +65,25 @@ const TryProcessingPage = props => {
     window.location.reload();
   };
 
+  const sendError = async () => {
+    const data = {
+      id: match.id,
+      type: "match"
+    };
+
+    const url = config.get("backend_url") + "report/";
+
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    window.location.reload();
+  };
+
   return (
     <div className="VideoPlayer">
       <div className="video-con">
@@ -138,6 +157,9 @@ const TryProcessingPage = props => {
           Submit Tries
         </button>
       </form>
+      <button className="submitButton" onClick={sendError}>
+        Error
+      </button>
     </div>
   );
 };
