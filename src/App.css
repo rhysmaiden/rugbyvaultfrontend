@@ -15,7 +15,7 @@ body {
 }
 
 .VideoGrid {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .Grid {
@@ -458,4 +458,40 @@ input[type="time"]::-webkit-clear-button {
     order: 1px;
     display: block;
   }
+}
+
+/* NAVTABS */
+
+.NavTabs {
+  display: flex;
+}
+
+.NavTabs > nav {
+  background-color: white;
+  padding-left: 0px !important;
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
+.NavTabs > nav > ul {
+  padding: 0px;
+  margin-bottom: 0px;
+}
+
+.NavTabs > nav > ul > a {
+  margin-right: 25px;
+}
+
+.NavTabs > nav > ul > a:hover {
+  cursor: pointer;
+  border-bottom: 5px solid #0d3f69;
+  color: black !important;
+}
+
+#activeTab {
+  border-bottom: 5px solid #0d3f69;
+}
+
+.grid-title {
+  margin-bottom: 0px;
 }
