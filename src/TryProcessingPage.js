@@ -1,16 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./App.css";
 import VideoGrid from "./VideoGrid.js";
 import Chart from "./Chart.js";
 import config from "react-global-configuration";
+import YouTube from "react-youtube";
 
 const TryProcessingPage = props => {
   const [tries, setTries] = useState([]);
   const [match, setMatch] = useState({});
+  const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
     getData();
+    document.addEventListener("keypress", handleKeyPress);
   }, []);
+
+  const handleKeyPress = useCallback(event => {
+    console.log(event.keyCode);
+
+    if (event.keyCode == 32) {
+      //Focus back on youube video and play
+      return;
+    } else if (event.keyCode == 107) {
+      //Log current time
+      console.log(currentTime);
+    }
+  });
 
   const getData = async () => {
     console.log(props);
@@ -84,19 +99,39 @@ const TryProcessingPage = props => {
     window.location.reload();
   };
 
+  const paused = e => {
+    console.log("paused");
+    console.log(typeof e.target.getCurrentTime());
+    console.log(typeof 0);
+    setCurrentTime(e.target.getCurrentTime());
+
+    // 1. UnFocus
+    window.focus();
+  };
+
   return (
     <div className="VideoPlayer">
       <div className="video-con">
-        <iframe
+        <YouTube
+          id="youtube"
+          videoId={match.video_link && match.video_link.split("=")[1]} // defaults -> null
+          // containerClassName={"video-con"} // defaults -> ''
+
+          // onPlay={} // defaults -> noop
+          onPause={paused} // defaults -> noop
+          onKeyPress={paused}
+        />
+        {/* <iframe
           src={
             match.video_link &&
             match.video_link.replace("watch?v=", "embed/") + "?autoplay=1"
           }
+          id="frame_id"
           frameBorder="0"
           width="100%"
           height="100%"
           allowFullScreen
-        ></iframe>{" "}
+        ></iframe>{" "} */}
       </div>
       <form onSubmit={submitTries}>
         <div className="try-times">
