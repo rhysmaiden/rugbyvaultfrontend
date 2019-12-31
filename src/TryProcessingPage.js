@@ -99,6 +99,48 @@ const TryProcessingPage = props => {
     window.location.reload();
   };
 
+  const setTime = () => {
+    var currentTotalSeconds = Math.floor(currentTime);
+    var currentMinutes = Math.floor(currentTotalSeconds / 60);
+    var currentSeconds = currentTotalSeconds % 60;
+
+    console.log(currentMinutes);
+    console.log(currentSeconds);
+
+    var start_mins = document.getElementsByClassName("start-min");
+    var start_secs = document.getElementsByClassName("start-sec");
+    var end_mins = document.getElementsByClassName("end-min");
+    var end_secs = document.getElementsByClassName("end-sec");
+
+    console.log(start_mins.length);
+    for (var i = 0; i < start_mins.length; i++) {
+      // console.log(start_mins[i].value);
+      console.log(start_mins[i].value.match(/^[0-9]+$/) != null);
+      if (start_mins[i].value.match(/^[0-9]+$/) == null) {
+        console.log("WORKED");
+        start_mins[i].value = currentMinutes;
+        start_secs[i].value = currentSeconds;
+
+        break;
+      }
+
+      if (end_mins[i].value.match(/^[0-9]+$/) == null) {
+        end_mins[i].value = currentMinutes;
+        end_secs[i].value = currentSeconds;
+
+        try {
+          start_mins[i + 1].value = currentMinutes;
+          start_secs[i + 1].value = currentSeconds;
+        } catch (error) {
+          console.log("Last try");
+          document.getElementsByClassName("submitButton")[1].click();
+        }
+
+        break;
+      }
+    }
+  };
+
   const paused = e => {
     console.log("paused");
     console.log(typeof e.target.getCurrentTime());
@@ -106,7 +148,7 @@ const TryProcessingPage = props => {
     setCurrentTime(e.target.getCurrentTime());
 
     // 1. UnFocus
-    window.focus();
+    //window.focus();
   };
 
   return (
@@ -121,18 +163,10 @@ const TryProcessingPage = props => {
           onPause={paused} // defaults -> noop
           onKeyPress={paused}
         />
-        {/* <iframe
-          src={
-            match.video_link &&
-            match.video_link.replace("watch?v=", "embed/") + "?autoplay=1"
-          }
-          id="frame_id"
-          frameBorder="0"
-          width="100%"
-          height="100%"
-          allowFullScreen
-        ></iframe>{" "} */}
       </div>
+      <button className="submitButton" onClick={setTime}>
+        Set current time
+      </button>
       <form onSubmit={submitTries}>
         <div className="try-times">
           <p className="form-heading">Name</p>

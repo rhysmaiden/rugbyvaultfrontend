@@ -2,19 +2,23 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import { tsConstructorType } from "@babel/types";
 import VideoBox from "./VideoBox.js";
+import Loader from "react-loader-spinner";
+import { useSpring, animated } from "react-spring";
 
 const VideoGrid = props => {
   const [videos, setVideos] = useState([]);
+
+  const animation = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   useEffect(() => {
     setVideos(props.data);
   });
 
   return (
-    <div className="VideoGrid">
+    <animated.div style={animation} className="VideoGrid">
       <h3 className="grid-title">{props.title}</h3>
       <div className="Grid">
-        {videos &&
+        {videos ? (
           videos.map(video =>
             props.type === "match" ? (
               <VideoBox
@@ -53,9 +57,18 @@ const VideoGrid = props => {
                 rating_count={video.rating_count}
               />
             )
-          )}
+          )
+        ) : (
+          <Loader
+            type="RevolvingDot"
+            color="#0d3f69"
+            height={100}
+            width={100}
+            timeout={3000} //3 secs
+          />
+        )}
       </div>
-    </div>
+    </animated.div>
   );
 };
 
