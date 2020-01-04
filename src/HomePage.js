@@ -7,6 +7,7 @@ import NavTabs from "./NavTabs.js";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
+  const [changeData, setChangeData] = useState(false);
   const [test, setTest] = useState(false);
 
   const tabs = ["All", "International", "Super Rugby", "Premiership"];
@@ -17,11 +18,8 @@ const HomePage = () => {
   }, []);
 
   const getData = async index => {
-    console.log("Triggered");
-
+    setChangeData(true);
     var request = "";
-
-    console.log(index);
 
     if (index == 0) {
       request = config.get("backend_url") + "highlights/";
@@ -33,8 +31,6 @@ const HomePage = () => {
       request = config.get("backend_url") + "highlights/?league=aviva";
     }
 
-    console.log(request);
-
     const response = await fetch(request, {
       mode: "cors"
     });
@@ -42,13 +38,19 @@ const HomePage = () => {
     const jsonData = await response.json();
     console.log(jsonData);
     setData(jsonData);
+    setChangeData(false);
   };
 
   return (
     <div className="HomePage">
       <h3 className="grid-title">Recent Matches</h3>
       <NavTabs titles={tabs} activeTab={0} changeTab={getData} />
-      <VideoGrid key="2" data={data.matches} type="match" />
+      <VideoGrid
+        key="2"
+        data={data.matches}
+        changeData={changeData}
+        type="match"
+      />
       <h3 className="grid-title">Recent Tries</h3>
       <NavTabs titles={tabs} activeTab={0} changeTab={getData} />
       <VideoGrid key="1" data={data.tries} type="try" />

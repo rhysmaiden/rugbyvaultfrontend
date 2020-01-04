@@ -3,19 +3,42 @@ import "./App.css";
 import { tsConstructorType } from "@babel/types";
 import VideoBox from "./VideoBox.js";
 import Loader from "react-loader-spinner";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated, config } from "react-spring";
 
 const VideoGrid = props => {
   const [videos, setVideos] = useState([]);
 
-  const animation = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const animation = useSpring({ opacity: 1, from: { opacity: 1 } });
 
   useEffect(() => {
+    console.log("Changed");
     setVideos(props.data);
   });
 
+  const fadeIn = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+    config: { duration: 2000 }
+  });
+
+  const fadeOut = useSpring({
+    opacity: 0,
+    from: { opacity: 1 },
+    config: { duration: 2000 }
+  });
+
+  // const transitions = useTransition(cards, null, {
+  //   from: { o: 0 },
+  //   enter: { o: 1 },
+  //   leave: { o: 2 },
+  //   config: { duration: 2000 }
+  // });
+
   return (
-    <animated.div style={animation} className="VideoGrid">
+    <animated.div
+      style={props.changeData ? fadeOut : fadeIn}
+      className="VideoGrid"
+    >
       <h3 className="grid-title">{props.title}</h3>
       <div className="Grid">
         {videos ? (

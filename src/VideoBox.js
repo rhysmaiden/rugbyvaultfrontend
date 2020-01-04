@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Rating from "react-rating";
+import { useSpring, animated, config } from "react-spring";
 
 function VideoBox(props) {
   const openLink = () => {
     window.location = props.link;
   };
 
+  const [runFadeIn, setRunFadeIn] = useState(false);
+  const fadeIn = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+    config: { duration: 4000 }
+  });
+  const fadeOut = useSpring({ opacity: 0, from: { opacity: 1 } });
+
+  const [animatedProps, setAnimatedProps] = useSpring(() => {
+    return {
+      opacity: 1,
+      from: { opacity: 0 }
+    };
+  });
+
   return (
-    <div className="VideoBox">
+    <animated.div className="VideoBox">
       {props.link && (
         <React.Fragment>
           <img onClick={openLink} src={props.image}></img>
@@ -30,7 +46,7 @@ function VideoBox(props) {
           </div>
         </React.Fragment>
       )}
-    </div>
+    </animated.div>
   );
 }
 
