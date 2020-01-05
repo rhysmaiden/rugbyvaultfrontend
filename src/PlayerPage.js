@@ -12,14 +12,14 @@ const PlayerPage = props => {
   const [filterOptions, setFilterOptions] = useState([]);
 
   useEffect(() => {
-    console.log("REFRSRH");
+    getData();
+  }, [filter]);
 
-    if (filterOptions.length == 0) {
+  useEffect(() => {
+    if (data.length != 0) {
       createOptions();
     }
-
-    // getData();
-  }, [filter, filterOptions]);
+  }, [data]);
 
   const getData = async () => {
     const request =
@@ -40,21 +40,37 @@ const PlayerPage = props => {
   function createOptions() {
     var options = [];
 
+    var years = [];
+    data.tries.map(trie => {
+      var year = trie.match.date.split("-")[2];
+
+      var uniqueYear = true;
+
+      years.map(yearElement => {
+        if (year == yearElement.name) {
+          uniqueYear = false;
+        }
+      });
+
+      if (uniqueYear) {
+        years.push({ name: year, checked: true });
+      }
+    });
+
     options.push({
       name: "Year",
-      options: [
-        { name: "2020", checked: true },
-        { name: "2019", checked: true },
-        { name: "2018", checked: true }
-      ]
+      options: years
+    });
+
+    var teams = [];
+
+    data.teams.map(team => {
+      teams.push({ name: team.team_name, checked: true });
     });
 
     options.push({
       name: "Team",
-      options: [
-        { name: "Hurricanes", checked: true },
-        { name: "New Zealand", checked: true }
-      ]
+      options: teams
     });
 
     console.log(options);
