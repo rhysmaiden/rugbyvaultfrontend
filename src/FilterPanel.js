@@ -13,11 +13,9 @@ const FilterPanel = props => {
 
   return (
     <div className="FilterPanel">
-      <h1>FILTER PANEL</h1>
       {props.options &&
         props.options.map(filteroption => (
           <React.Fragment>
-            <h1>FILTEROPTION</h1>
             <FilterOption
               name={filteroption.name}
               options={filteroption.options}

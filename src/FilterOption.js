@@ -15,7 +15,6 @@ const FilterOption = props => {
       <h3>{props.name}</h3>
       {props.options.map(option => (
         <div className="checkOption">
-          <p>{option.name}</p>
           <input
             checked={option.checked}
             type="checkbox"
@@ -23,6 +22,7 @@ const FilterOption = props => {
               props.changeFilter(props.name, option.name);
             }}
           ></input>
+          <p>{option.name}</p>
         </div>
       ))}
     </div>

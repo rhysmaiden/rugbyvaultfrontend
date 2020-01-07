@@ -17,11 +17,6 @@ const VideoPlayer = props => {
   }, [props]);
 
   const getVideo = async () => {
-    console.log(props);
-    // if (props.routeParams.match == undefined) {
-    //   return;
-    // }
-
     if (props.routeParams.match.params.type == "try") {
       const request =
         config.get("backend_url") +

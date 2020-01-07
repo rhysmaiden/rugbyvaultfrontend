@@ -19,12 +19,35 @@ const TeamPage = props => {
   }, [filter]);
 
   const getData = async () => {
+    var yearString = "";
+    var teamString = "";
+
+    if (filterOptions.length != 0) {
+      filterOptions[0].options.map(option => {
+        if (option.checked) {
+          yearString += option.name + ",";
+        }
+      });
+
+      filterOptions[1].options.map(option => {
+        if (option.checked) {
+          teamString += option.name + ",";
+        }
+      });
+    }
+
+    yearString = yearString.slice(0, -1);
+    teamString = teamString.slice(0, -1);
+
     const request =
       config.get("backend_url") +
-      "team?id=" +
-      props.match.params.id +
-      "&order=" +
-      filter;
+      "matches" +
+      "?order=" +
+      filter +
+      "&year=" +
+      (yearString.length == 0 ? "all" : yearString) +
+      "&team=" +
+      (teamString.length == 0 ? "all" : teamString);
     const response = await fetch(request, {
       mode: "cors"
     });
@@ -50,16 +73,6 @@ const TeamPage = props => {
         />
       </div>
       <VideoGrid title="" key="2" data={data.matches} type="match" />
-      <div className="grid-heading">
-        <h3 className="grid-title">Tries</h3>
-        <Filter
-          changeFilter={e => {
-            setFilter(e);
-          }}
-          options={["date", "rating"]}
-        />
-      </div>
-      <VideoGrid title="" key="1" data={data.tries} type="try" />
     </div>
   );
 };

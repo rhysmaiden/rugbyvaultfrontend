@@ -9,6 +9,7 @@ const Filter = props => {
   };
   return (
     <div className="Filter">
+      <p>Sort by: </p>
       <form>
         <select class="event-type-select" onChange={changeFilter}>
           {props.options &&

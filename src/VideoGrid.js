@@ -27,13 +27,6 @@ const VideoGrid = props => {
     config: { duration: 2000 }
   });
 
-  // const transitions = useTransition(cards, null, {
-  //   from: { o: 0 },
-  //   enter: { o: 1 },
-  //   leave: { o: 2 },
-  //   config: { duration: 2000 }
-  // });
-
   return (
     <animated.div
       style={props.changeData ? fadeOut : fadeIn}

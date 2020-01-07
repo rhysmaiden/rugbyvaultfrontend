@@ -22,39 +22,60 @@ const PlayerPage = props => {
   }, [data]);
 
   const getData = async () => {
+    console.log("Run Get Data");
+    var yearString = "";
+    var teamString = "";
+
+    if (filterOptions.length != 0) {
+      filterOptions[0].options.map(option => {
+        if (option.checked) {
+          yearString += option.name + ",";
+        }
+      });
+
+      filterOptions[1].options.map(option => {
+        if (option.checked) {
+          teamString += option.name + ",";
+        }
+      });
+    }
+
+    yearString = yearString.slice(0, -1);
+    teamString = teamString.slice(0, -1);
+
     const request =
       config.get("backend_url") +
       "player?id=" +
       props.match.params.id +
       "&order=" +
-      filter;
+      filter +
+      "&year=" +
+      (yearString.length == 0 ? "all" : yearString) +
+      "&team=" +
+      (teamString.length == 0 ? "all" : teamString);
     const response = await fetch(request, {
       mode: "cors"
     });
 
     const jsonData = await response.json();
+
     console.log(jsonData);
+
     setData(jsonData);
   };
 
   function createOptions() {
+    console.log("Run Create Options");
     var options = [];
-
     var years = [];
-    data.tries.map(trie => {
-      var year = trie.match.date.split("-")[2];
+    var teams = [];
 
-      var uniqueYear = true;
+    data.yearFilter.map(year => {
+      years.push({ name: year.value, checked: year.checked });
+    });
 
-      years.map(yearElement => {
-        if (year == yearElement.name) {
-          uniqueYear = false;
-        }
-      });
-
-      if (uniqueYear) {
-        years.push({ name: year, checked: true });
-      }
+    data.teamFilter.map(team => {
+      teams.push({ name: team.value, checked: team.checked });
     });
 
     options.push({
@@ -62,23 +83,26 @@ const PlayerPage = props => {
       options: years
     });
 
-    var teams = [];
+    // var teams = [];
 
-    data.teams.map(team => {
-      teams.push({ name: team.team_name, checked: true });
-    });
+    // data.teams.map(team => {
+    //   if (data.teamFilter.includes(team.team_name)) {
+    //     teams.push({ name: team.team_name, checked: true });
+    //   } else {
+    //     teams.push({ name: team.team_name, checked: false });
+    //   }
+    // });
 
     options.push({
       name: "Team",
       options: teams
     });
 
-    console.log(options);
-
     setFilterOptions(options);
   }
 
   const changeFilter = (name, option) => {
+    console.log("Run Change Filter");
     var temp_filter_options = [];
     filterOptions.map(option => {
       temp_filter_options.push(option);
@@ -94,27 +118,32 @@ const PlayerPage = props => {
     });
 
     setFilterOptions(temp_filter_options);
+    getData();
   };
 
   return (
     <div className="HomePage">
-      <h1>{data.player && data.player.name}</h1>
+      <div className="video-grid">
+        <div className="blank"></div>
 
-      <div className="grid-heading">
-        <h3 className="grid-title">Tries</h3>
+        <div className="right-col">
+          <div className="grid-heading">
+            <h1>{data.player && data.player.name}</h1>
+            <Filter
+              changeFilter={e => {
+                setFilter(e);
+              }}
+              options={["date", "rating"]}
+            />
+          </div>
+        </div>
         <FilterPanel
           name="Year"
           options={filterOptions}
           changeFilter={changeFilter}
         />
-        <Filter
-          changeFilter={e => {
-            setFilter(e);
-          }}
-          options={["date", "rating"]}
-        />
+        <VideoGrid key="1" data={data.tries} type="try" />
       </div>
-      <VideoGrid key="1" data={data.tries} type="try" />
     </div>
   );
 };

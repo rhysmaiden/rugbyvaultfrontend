@@ -14,6 +14,7 @@ import { GoogleLogin, GoogleLogout } from "react-google-login";
 import Chart from "./Chart.js";
 import Rating from "react-rating";
 import TryProcessingPage from "./TryProcessingPage.js";
+import MatchesPage from "./MatchesPage.js";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -86,6 +87,7 @@ const App = () => {
           <Route path="/player/:id?" component={PlayerPage} />
           <Route path="/chart/:type?" component={Chart} />
           <Route path="/tryprocessing/:id?" component={TryProcessingPage} />
+          <Route path="/matches" component={MatchesPage} />
           {/* <Route path="/player/:show_id?/:episode_id?" component={Player} /> */}
         </Router>
 
