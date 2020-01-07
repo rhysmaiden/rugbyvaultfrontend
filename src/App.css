@@ -16,15 +16,18 @@ body {
 
 .VideoGrid {
   margin-bottom: 50px;
-  background-color: white;
+  /* background-color: white;
   border: solid 1px #d3d3d3;
-  padding: 10px;
+  padding: 10px; */
 }
 
 .Grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   grid-gap: 16px;
+  background-color: white;
+  border: solid 1px #d3d3d3;
+  padding: 10px;
 
   /* justify-content: space-between; */
 }
@@ -360,11 +363,11 @@ ul {
   list-style-type: none;
 }
 
-li > a {
+/* li > a {
   color: white;
   text-decoration: none;
   display: block;
-}
+} */
 
 li > a:hover {
   text-decoration: underline;
@@ -546,4 +549,13 @@ input[type="time"]::-webkit-clear-button {
 .FilterPanel {
   border: solid 1px #d3d3d3;
   padding: 10px;
+}
+
+.Pagination > ul {
+  display: flex;
+  justify-content: center;
+}
+
+.Pagination > ul > li {
+  margin-left: 10px;
 }

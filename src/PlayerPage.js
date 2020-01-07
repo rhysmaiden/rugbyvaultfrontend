@@ -83,16 +83,6 @@ const PlayerPage = props => {
       options: years
     });
 
-    // var teams = [];
-
-    // data.teams.map(team => {
-    //   if (data.teamFilter.includes(team.team_name)) {
-    //     teams.push({ name: team.team_name, checked: true });
-    //   } else {
-    //     teams.push({ name: team.team_name, checked: false });
-    //   }
-    // });
-
     options.push({
       name: "Team",
       options: teams

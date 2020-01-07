@@ -5,18 +5,26 @@ import { tsPropertySignature } from "@babel/types";
 import Filter from "./Filter.js";
 import config from "react-global-configuration";
 import FilterPanel from "./FilterPanel.js";
+import ReactPaginate from "react-paginate";
 
-const TeamPage = props => {
+const MatchesPage = props => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState("date");
   const [filterOptions, setFilterOptions] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
 
   //   const [matches, setMatches] = useState([]);
   //   const [tries, setTries] = useState([]);
 
   useEffect(() => {
     getData();
-  }, [filter]);
+  }, [filter, pageNumber]);
+
+  useEffect(() => {
+    if (data.length != 0) {
+      createOptions();
+    }
+  }, [data]);
 
   const getData = async () => {
     var yearString = "";
@@ -47,7 +55,10 @@ const TeamPage = props => {
       "&year=" +
       (yearString.length == 0 ? "all" : yearString) +
       "&team=" +
-      (teamString.length == 0 ? "all" : teamString);
+      (teamString.length == 0 ? "all" : teamString) +
+      "&page=" +
+      pageNumber;
+
     const response = await fetch(request, {
       mode: "cors"
     });
@@ -60,21 +71,87 @@ const TeamPage = props => {
     console.log(jsonData[":tries"]);
   };
 
+  function createOptions() {
+    console.log("Run Create Options");
+    var options = [];
+    var years = [];
+    var teams = [];
+
+    data.yearFilter.map(year => {
+      years.push({ name: year.value, checked: year.checked });
+    });
+
+    data.teamFilter.map(team => {
+      teams.push({ name: team.value, checked: team.checked });
+    });
+
+    options.push({
+      name: "Year",
+      options: years
+    });
+
+    options.push({
+      name: "Team",
+      options: teams
+    });
+
+    setFilterOptions(options);
+  }
+
+  const changeFilter = (name, option) => {
+    console.log("Run Change Filter");
+    var temp_filter_options = [];
+    filterOptions.map(option => {
+      temp_filter_options.push(option);
+    });
+    temp_filter_options.map(filterOption => {
+      if (filterOption.name == name) {
+        filterOption.options.map(foption => {
+          if (option == foption.name) {
+            foption.checked = !foption.checked;
+          }
+        });
+      }
+    });
+
+    setFilterOptions(temp_filter_options);
+    getData();
+  };
+
+  const changePage = pageNumber => {
+    setPageNumber(pageNumber.selected + 1);
+  };
+
   return (
     <div className="HomePage">
-      <h1>{data.team && data.team.team_name}</h1>
-      <div className="grid-heading">
-        <h3 className="grid-title">Matches</h3>
-        <Filter
-          changeFilter={e => {
-            setFilter(e);
-          }}
-          options={["date", "rating"]}
+      <div className="video-grid">
+        <div className="blank"></div>
+
+        <div className="right-col">
+          <div className="grid-heading">
+            <Filter
+              changeFilter={e => {
+                setFilter(e);
+              }}
+              options={["date", "rating"]}
+            />
+          </div>
+        </div>
+        <FilterPanel
+          name="Year"
+          options={filterOptions}
+          changeFilter={changeFilter}
+        />
+        <VideoGrid
+          key="1"
+          data={data.matches}
+          type="match"
+          changePage={changePage}
+          pageCount={data.pageCount}
         />
       </div>
-      <VideoGrid title="" key="2" data={data.matches} type="match" />
     </div>
   );
 };
 
-export default TeamPage;
+export default MatchesPage;

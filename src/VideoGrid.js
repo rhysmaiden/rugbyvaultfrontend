@@ -4,6 +4,7 @@ import { tsConstructorType } from "@babel/types";
 import VideoBox from "./VideoBox.js";
 import Loader from "react-loader-spinner";
 import { useSpring, animated, config } from "react-spring";
+import ReactPaginate from "react-paginate";
 
 const VideoGrid = props => {
   const [videos, setVideos] = useState([]);
@@ -32,7 +33,7 @@ const VideoGrid = props => {
       style={props.changeData ? fadeOut : fadeIn}
       className="VideoGrid"
     >
-      <h3 className="grid-title">{props.title}</h3>
+      {/* <h3 className="grid-title">{props.title}</h3> */}
       <div className="Grid">
         {videos ? (
           videos.map(video =>
@@ -83,6 +84,14 @@ const VideoGrid = props => {
             timeout={3000} //3 secs
           />
         )}
+      </div>
+      <div className="Pagination">
+        <ReactPaginate
+          pageCount={props.pageCount}
+          pageRangeDisplayed={2}
+          marginPagesDisplayed={2}
+          onPageChange={props.changePage}
+        />
       </div>
     </animated.div>
   );
