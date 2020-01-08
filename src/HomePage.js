@@ -51,9 +51,30 @@ const HomePage = () => {
         changeData={changeData}
         type="match"
       />
+      <div className="video-grid-actions">
+        <button
+          className="action-button blue-button"
+          onClick={() => {
+            window.location = "/matches";
+          }}
+        >
+          View more
+        </button>
+      </div>
+
       <h3 className="grid-title">Recent Tries</h3>
       <NavTabs titles={tabs} activeTab={0} changeTab={getData} />
       <VideoGrid key="1" data={data.tries} type="try" />
+      <div className="video-grid-actions">
+        <button
+          className="action-button blue-button"
+          onClick={() => {
+            window.location = "/matches";
+          }}
+        >
+          View more
+        </button>
+      </div>
     </div>
   );
 };

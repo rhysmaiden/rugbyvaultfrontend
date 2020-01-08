@@ -78,7 +78,7 @@ const VideoGrid = props => {
         ) : (
           <Loader
             type="RevolvingDot"
-            color="#0d3f69"
+            color="#d3d3d3"
             height={100}
             width={100}
             timeout={3000} //3 secs
@@ -86,12 +86,14 @@ const VideoGrid = props => {
         )}
       </div>
       <div className="Pagination">
-        <ReactPaginate
-          pageCount={props.pageCount}
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={2}
-          onPageChange={props.changePage}
-        />
+        {props.pageCount && (
+          <ReactPaginate
+            pageCount={props.pageCount}
+            pageRangeDisplayed={2}
+            marginPagesDisplayed={2}
+            onPageChange={props.changePage}
+          />
+        )}
       </div>
     </animated.div>
   );

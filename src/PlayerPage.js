@@ -10,10 +10,11 @@ const PlayerPage = props => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState("date");
   const [filterOptions, setFilterOptions] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
 
   useEffect(() => {
     getData();
-  }, [filter]);
+  }, [filter, pageNumber]);
 
   useEffect(() => {
     if (data.length != 0) {
@@ -52,7 +53,9 @@ const PlayerPage = props => {
       "&year=" +
       (yearString.length == 0 ? "all" : yearString) +
       "&team=" +
-      (teamString.length == 0 ? "all" : teamString);
+      (teamString.length == 0 ? "all" : teamString) +
+      "&page=" +
+      pageNumber;
     const response = await fetch(request, {
       mode: "cors"
     });
@@ -108,7 +111,14 @@ const PlayerPage = props => {
     });
 
     setFilterOptions(temp_filter_options);
-    getData();
+    setPageNumber(1);
+    if (pageNumber == 1) {
+      getData();
+    }
+  };
+
+  const changePage = pageNumber => {
+    setPageNumber(pageNumber.selected + 1);
   };
 
   return (
@@ -132,7 +142,13 @@ const PlayerPage = props => {
           options={filterOptions}
           changeFilter={changeFilter}
         />
-        <VideoGrid key="1" data={data.tries} type="try" />
+        <VideoGrid
+          key="1"
+          data={data.tries}
+          type="try"
+          changePage={changePage}
+          pageCount={data.pageCount}
+        />
       </div>
     </div>
   );

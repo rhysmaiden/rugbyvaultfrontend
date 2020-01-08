@@ -15,7 +15,8 @@ body {
 }
 
 .VideoGrid {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
+
   /* background-color: white;
   border: solid 1px #d3d3d3;
   padding: 10px; */
@@ -28,6 +29,7 @@ body {
   background-color: white;
   border: solid 1px #d3d3d3;
   padding: 10px;
+  min-height: 505px;
 
   /* justify-content: space-between; */
 }
@@ -482,12 +484,13 @@ input[type="time"]::-webkit-clear-button {
 
 .NavTabs {
   display: flex;
+  margin-bottom: 10px;
 }
 
 .NavTabs > nav {
   background-color: white;
   padding-left: 0px !important;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #d3d3d3;
   width: 100%;
 }
 
@@ -558,4 +561,26 @@ input[type="time"]::-webkit-clear-button {
 
 .Pagination > ul > li {
   margin-left: 10px;
+}
+
+.action-button {
+  border-radius: 20px;
+  background-color: #0d3f69;
+  color: white;
+  font-size: 16px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.action-button:hover {
+  cursor: pointer;
+  border: solid white 2px;
+}
+
+.video-grid-actions {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
