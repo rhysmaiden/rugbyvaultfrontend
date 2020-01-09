@@ -9,6 +9,8 @@ const HomePage = () => {
   const [data, setData] = useState([]);
   const [changeData, setChangeData] = useState(false);
   const [test, setTest] = useState(false);
+  const [matchIndex, setMatchIndex] = useState(0);
+  const [tryIndex, setTryIndex] = useState(0);
 
   const tabs = [
     "All",
@@ -20,29 +22,46 @@ const HomePage = () => {
     "Mitre 10"
   ];
 
+  const tab_slugs = [
+    "all",
+    "international",
+    "superrugby",
+    "aviva",
+    "pro14",
+    "usa",
+    "mitre10"
+  ];
+
   useEffect(() => {
     console.log("Use Effect run");
     getData(0);
   }, []);
 
-  const getData = async index => {
+  const getData = async (index, bar) => {
+    console.log(index, bar);
     setChangeData(true);
     var request = "";
+    var bar_string = "";
 
-    if (index == 0) {
-      request = config.get("backend_url") + "highlights/";
-    } else if (index == 1) {
-      request = config.get("backend_url") + "highlights/?league=international";
-    } else if (index == 2) {
-      request = config.get("backend_url") + "highlights/?league=superrugby";
-    } else if (index == 3) {
-      request = config.get("backend_url") + "highlights/?league=aviva";
-    } else if (index == 4) {
-      request = config.get("backend_url") + "highlights/?league=pro14";
-    } else if (index == 5) {
-      request = config.get("backend_url") + "highlights/?league=usa";
-    } else if (index == 6) {
-      request = config.get("backend_url") + "highlights/?league=mitre10";
+    if (bar == 0) {
+      bar_string = "match";
+      setMatchIndex(index);
+
+      if (tryIndex != 0) {
+      }
+    } else {
+      bar_string = "try";
+      setTryIndex(index);
+    }
+
+    var request = config.get("backend_url") + "highlights/?";
+
+    if (bar_string == "match") {
+      request += `league_match=${tab_slugs[index]}`;
+      request += `&league_try=${tab_slugs[tryIndex]}`;
+    } else {
+      request += `league_try=${tab_slugs[index]}`;
+      request += `&league_match=${tab_slugs[matchIndex]}`;
     }
 
     const response = await fetch(request, {
@@ -58,7 +77,13 @@ const HomePage = () => {
   return (
     <div className="HomePage">
       <h3 className="grid-title">Recent Matches</h3>
-      <NavTabs titles={tabs} activeTab={0} changeTab={getData} />
+      <NavTabs
+        titles={tabs}
+        activeTab={0}
+        changeTab={index => {
+          getData(index, 0);
+        }}
+      />
       <VideoGrid
         key="2"
         data={data.matches}
@@ -77,7 +102,13 @@ const HomePage = () => {
       </div>
 
       <h3 className="grid-title">Recent Tries</h3>
-      <NavTabs titles={tabs} activeTab={0} changeTab={getData} />
+      <NavTabs
+        titles={tabs}
+        activeTab={0}
+        changeTab={index => {
+          getData(index, 1);
+        }}
+      />
       <VideoGrid key="1" data={data.tries} type="try" />
       <div className="video-grid-actions">
         <button
