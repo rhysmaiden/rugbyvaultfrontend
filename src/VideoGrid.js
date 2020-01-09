@@ -33,7 +33,7 @@ const VideoGrid = props => {
       style={props.changeData ? fadeOut : fadeIn}
       className="VideoGrid"
     >
-      {/* <h3 className="grid-title">{props.title}</h3> */}
+      <p>{props.total}</p>
       <div className="Grid">
         {videos ? (
           videos.map(video =>

@@ -13,9 +13,6 @@ const MatchesPage = props => {
   const [filterOptions, setFilterOptions] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
 
-  //   const [matches, setMatches] = useState([]);
-  //   const [tries, setTries] = useState([]);
-
   useEffect(() => {
     getData();
   }, [filter, pageNumber]);
@@ -29,6 +26,7 @@ const MatchesPage = props => {
   const getData = async () => {
     var yearString = "";
     var teamString = "";
+    var leagueString = "";
 
     if (filterOptions.length != 0) {
       filterOptions[0].options.map(option => {
@@ -42,10 +40,17 @@ const MatchesPage = props => {
           teamString += option.name + ",";
         }
       });
+
+      filterOptions[2].options.map(option => {
+        if (option.checked) {
+          leagueString += option.name + ",";
+        }
+      });
     }
 
     yearString = yearString.slice(0, -1);
     teamString = teamString.slice(0, -1);
+    leagueString = leagueString.slice(0, -1);
 
     const request =
       config.get("backend_url") +
@@ -56,6 +61,8 @@ const MatchesPage = props => {
       (yearString.length == 0 ? "all" : yearString) +
       "&team=" +
       (teamString.length == 0 ? "all" : teamString) +
+      "&league=" +
+      (leagueString.length == 0 ? "all" : leagueString) +
       "&page=" +
       pageNumber;
 
@@ -76,6 +83,7 @@ const MatchesPage = props => {
     var options = [];
     var years = [];
     var teams = [];
+    var leagues = [];
 
     data.yearFilter.map(year => {
       years.push({ name: year.value, checked: year.checked });
@@ -83,6 +91,10 @@ const MatchesPage = props => {
 
     data.teamFilter.map(team => {
       teams.push({ name: team.value, checked: team.checked });
+    });
+
+    data.leagueFilter.map(league => {
+      leagues.push({ name: league.value, checked: league.checked });
     });
 
     options.push({
@@ -93,6 +105,11 @@ const MatchesPage = props => {
     options.push({
       name: "Team",
       options: teams
+    });
+
+    options.push({
+      name: "League",
+      options: leagues
     });
 
     setFilterOptions(options);
@@ -129,6 +146,7 @@ const MatchesPage = props => {
 
         <div className="right-col">
           <div className="grid-heading">
+            <h1>All Matches</h1>
             <Filter
               changeFilter={e => {
                 setFilter(e);

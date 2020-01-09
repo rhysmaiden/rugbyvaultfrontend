@@ -5,8 +5,9 @@ import { tsPropertySignature } from "@babel/types";
 import Filter from "./Filter.js";
 import config from "react-global-configuration";
 import FilterPanel from "./FilterPanel.js";
+import ReactPaginate from "react-paginate";
 
-const TeamPage = props => {
+const TriesPage = props => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState("date");
   const [filterOptions, setFilterOptions] = useState([]);
@@ -53,9 +54,8 @@ const TeamPage = props => {
 
     const request =
       config.get("backend_url") +
-      "team?id=" +
-      props.match.params.id +
-      "&order=" +
+      "tries" +
+      "?order=" +
       filter +
       "&year=" +
       (yearString.length == 0 ? "all" : yearString) +
@@ -65,6 +65,7 @@ const TeamPage = props => {
       (leagueString.length == 0 ? "all" : leagueString) +
       "&page=" +
       pageNumber;
+
     const response = await fetch(request, {
       mode: "cors"
     });
@@ -131,10 +132,7 @@ const TeamPage = props => {
     });
 
     setFilterOptions(temp_filter_options);
-    setPageNumber(1);
-    if (pageNumber == 1) {
-      getData();
-    }
+    getData();
   };
 
   const changePage = pageNumber => {
@@ -148,7 +146,7 @@ const TeamPage = props => {
 
         <div className="right-col">
           <div className="grid-heading">
-            <h1>{data.team && data.team.team_name}</h1>
+            <h1>All Tries</h1>
             <Filter
               changeFilter={e => {
                 setFilter(e);
@@ -163,9 +161,9 @@ const TeamPage = props => {
           changeFilter={changeFilter}
         />
         <VideoGrid
-          key="2"
-          data={data.matches}
-          type="match"
+          key="1"
+          data={data.tries}
+          type="try"
           changePage={changePage}
           pageCount={data.pageCount}
         />
@@ -174,4 +172,4 @@ const TeamPage = props => {
   );
 };
 
-export default TeamPage;
+export default TriesPage;

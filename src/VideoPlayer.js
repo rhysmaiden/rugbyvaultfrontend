@@ -11,6 +11,8 @@ const VideoPlayer = props => {
   const [grid, setGrid] = useState([]);
   const [userRating, setUserRating] = useState([]);
   const [error, setError] = useState("");
+  const [tries, setTries] = useState([]);
+  const [showTries, setShowTries] = useState(false);
 
   useEffect(() => {
     getVideo();
@@ -62,6 +64,7 @@ const VideoPlayer = props => {
       setVid(jsonData.match);
       setGrid(jsonData.matches);
       setUserRating(jsonData.rating);
+      setTries(jsonData.tries);
     }
   };
 
@@ -222,6 +225,18 @@ const VideoPlayer = props => {
                 <button onClick={sendError}>Error</button>
               </div>
             </div>
+            <button
+              className="action-button blue-button"
+              onClick={() => {
+                console.log(tries);
+                setShowTries(!showTries);
+              }}
+            >
+              {showTries ? "Hide" : "Show match tries"}
+            </button>
+            {showTries && (
+              <VideoGrid title="Tries" key="9" data={tries} type="try" />
+            )}
             <VideoGrid title="Match History" key="4" data={grid} type="match" />
           </React.Fragment>
         )

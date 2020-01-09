@@ -26,6 +26,7 @@ const PlayerPage = props => {
     console.log("Run Get Data");
     var yearString = "";
     var teamString = "";
+    var leagueString = "";
 
     if (filterOptions.length != 0) {
       filterOptions[0].options.map(option => {
@@ -39,10 +40,17 @@ const PlayerPage = props => {
           teamString += option.name + ",";
         }
       });
+
+      filterOptions[2].options.map(option => {
+        if (option.checked) {
+          leagueString += option.name + ",";
+        }
+      });
     }
 
     yearString = yearString.slice(0, -1);
     teamString = teamString.slice(0, -1);
+    leagueString = leagueString.slice(0, -1);
 
     const request =
       config.get("backend_url") +
@@ -54,6 +62,8 @@ const PlayerPage = props => {
       (yearString.length == 0 ? "all" : yearString) +
       "&team=" +
       (teamString.length == 0 ? "all" : teamString) +
+      "&league=" +
+      (leagueString.length == 0 ? "all" : leagueString) +
       "&page=" +
       pageNumber;
     const response = await fetch(request, {
@@ -72,6 +82,7 @@ const PlayerPage = props => {
     var options = [];
     var years = [];
     var teams = [];
+    var leagues = [];
 
     data.yearFilter.map(year => {
       years.push({ name: year.value, checked: year.checked });
@@ -79,6 +90,10 @@ const PlayerPage = props => {
 
     data.teamFilter.map(team => {
       teams.push({ name: team.value, checked: team.checked });
+    });
+
+    data.leagueFilter.map(league => {
+      leagues.push({ name: league.value, checked: league.checked });
     });
 
     options.push({
@@ -89,6 +104,11 @@ const PlayerPage = props => {
     options.push({
       name: "Team",
       options: teams
+    });
+
+    options.push({
+      name: "League",
+      options: leagues
     });
 
     setFilterOptions(options);

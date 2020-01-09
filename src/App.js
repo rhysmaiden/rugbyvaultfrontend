@@ -15,6 +15,7 @@ import Chart from "./Chart.js";
 import Rating from "react-rating";
 import TryProcessingPage from "./TryProcessingPage.js";
 import MatchesPage from "./MatchesPage.js";
+import TriesPage from "./TriesPage.js";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -88,6 +89,7 @@ const App = () => {
           <Route path="/chart/:type?" component={Chart} />
           <Route path="/tryprocessing/:id?" component={TryProcessingPage} />
           <Route path="/matches" component={MatchesPage} />
+          <Route path="/tries" component={TriesPage} />
           {/* <Route path="/player/:show_id?/:episode_id?" component={Player} /> */}
         </Router>
 

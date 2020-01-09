@@ -10,7 +10,15 @@ const HomePage = () => {
   const [changeData, setChangeData] = useState(false);
   const [test, setTest] = useState(false);
 
-  const tabs = ["All", "International", "Super Rugby", "Premiership"];
+  const tabs = [
+    "All",
+    "International",
+    "Super Rugby",
+    "Premiership",
+    "Pro 14",
+    "USA",
+    "Mitre 10"
+  ];
 
   useEffect(() => {
     console.log("Use Effect run");
@@ -29,6 +37,12 @@ const HomePage = () => {
       request = config.get("backend_url") + "highlights/?league=superrugby";
     } else if (index == 3) {
       request = config.get("backend_url") + "highlights/?league=aviva";
+    } else if (index == 4) {
+      request = config.get("backend_url") + "highlights/?league=pro14";
+    } else if (index == 5) {
+      request = config.get("backend_url") + "highlights/?league=usa";
+    } else if (index == 6) {
+      request = config.get("backend_url") + "highlights/?league=mitre10";
     }
 
     const response = await fetch(request, {
@@ -69,7 +83,7 @@ const HomePage = () => {
         <button
           className="action-button blue-button"
           onClick={() => {
-            window.location = "/matches";
+            window.location = "/tries";
           }}
         >
           View more
