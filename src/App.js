@@ -25,7 +25,7 @@ config.set({
   backend_url:
     window.location.hostname == "localhost"
       ? "http://127.0.0.1:8000/"
-      : "http://127.0.0.1:8000/"
+      : "https://rhysmaiden.pythonanywhere.com/"
 });
 
 const App = () => {
