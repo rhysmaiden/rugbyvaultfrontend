@@ -26,6 +26,7 @@ const App = () => {
   const [credentials, setCredentials] = useState("");
 
   useEffect(() => {
+    // document.title = "The Rugby Vault";
     getCredentials();
   }, []);
 
