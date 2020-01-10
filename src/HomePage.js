@@ -1,67 +1,33 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import VideoGrid from "./VideoGrid.js";
-import Chart from "./Chart.js";
 import config from "react-global-configuration";
 import NavTabs from "./NavTabs.js";
+import { tabs, tab_slugs } from "./league_data.js";
 
 const HomePage = () => {
   const [data, setData] = useState([]);
   const [changeData, setChangeData] = useState(false);
-  const [test, setTest] = useState(false);
   const [matchIndex, setMatchIndex] = useState(0);
   const [tryIndex, setTryIndex] = useState(0);
 
-  const tabs = [
-    "All",
-    "International",
-    "Super Rugby",
-    "Premiership",
-    "Pro 14",
-    "USA",
-    "Mitre 10"
-  ];
-
-  const tab_slugs = [
-    "all",
-    "international",
-    "superrugby",
-    "aviva",
-    "pro14",
-    "usa",
-    "mitre10"
-  ];
-
   useEffect(() => {
-    console.log("Use Effect run");
     getData(0);
   }, []);
 
   const getData = async (index, bar) => {
-    console.log(index, bar);
     setChangeData(true);
-    var request = "";
-    var bar_string = "";
-
-    if (bar == 0) {
-      bar_string = "match";
-      setMatchIndex(index);
-
-      if (tryIndex != 0) {
-      }
-    } else {
-      bar_string = "try";
-      setTryIndex(index);
-    }
 
     var request = config.get("backend_url") + "highlights/?";
 
-    if (bar_string == "match") {
+    if (bar == 0) {
       request += `league_match=${tab_slugs[index]}`;
       request += `&league_try=${tab_slugs[tryIndex]}`;
+      setMatchIndex(index);
     } else {
       request += `league_try=${tab_slugs[index]}`;
       request += `&league_match=${tab_slugs[matchIndex]}`;
+      setTryIndex(index);
     }
 
     const response = await fetch(request, {

@@ -39,8 +39,9 @@ const Search = props => {
 
   return (
     <React.Fragment>
+      {/* Web */}
       {searchOpen ? (
-        <div className="search">
+        <div className="web-search">
           <input
             autoFocus
             className="search-box"
@@ -66,6 +67,7 @@ const Search = props => {
         </div>
       ) : (
         <a
+          className="web-search"
           onClick={() => {
             setSearchOpen(true);
           }}
@@ -73,6 +75,40 @@ const Search = props => {
           <i className="fas fa-search"></i>
         </a>
       )}
+
+      {/* Mobile */}
+
+      <a
+        className="mobile-search mobile-search-button"
+        onClick={() => {
+          setSearchOpen(!searchOpen);
+        }}
+      >
+        <i className="fas fa-search fa-lg"></i>
+      </a>
+
+      <div className={"navbar-links mobile-search " + (searchOpen && "active")}>
+        <ul>
+          <li>
+            <input
+              className="search-input"
+              placeholder="search"
+              value={searchText}
+              onChange={setText}
+              onBlur={() => {
+                setTimeout(function() {
+                  setSearchOpen(false);
+                }, 100);
+              }}
+            />
+          </li>
+          {searchItems.map(item => (
+            <li>
+              <a href={"/" + item.type + "/" + item.id}>{item.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </React.Fragment>
   );
 };

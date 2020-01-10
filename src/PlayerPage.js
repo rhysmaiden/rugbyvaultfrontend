@@ -28,6 +28,8 @@ const PlayerPage = props => {
     var teamString = "";
     var leagueString = "";
 
+    var optionStrings = [];
+
     if (filterOptions.length != 0) {
       filterOptions[0].options.map(option => {
         if (option.checked) {
