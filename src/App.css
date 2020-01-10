@@ -713,6 +713,7 @@ input[type="time"]::-webkit-clear-button {
     width: 100%;
     border-radius: 20px;
     text-align: center;
+    height: 2rem;
   }
 
   .navbar-links {
