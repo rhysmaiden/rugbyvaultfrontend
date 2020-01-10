@@ -163,6 +163,7 @@ body {
 .video-description {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .left-description > h1 {
@@ -677,6 +678,23 @@ input[type="time"]::-webkit-clear-button {
 } */
 
 @media (max-width: 500px) {
+  .video-description {
+    justify-content: flex-start;
+  }
+
+  .left-description {
+    margin-bottom: 10px;
+  }
+
+  .video-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .FilterPanel {
+    margin-bottom: 10px;
+  }
+
   .brand-title {
     position: relative;
     margin-left: auto;

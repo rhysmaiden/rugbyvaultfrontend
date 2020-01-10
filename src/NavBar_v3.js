@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { teams_in_leagues } from "./league_data.js";
 import Search from "./Search.js";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
 
-const NavBar_v3 = () => {
+const NavBar_v3 = props => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [dropDownActive, setDropDown] = useState(
@@ -62,6 +63,34 @@ const NavBar_v3 = () => {
               </li>
             </React.Fragment>
           ))}
+          <li>
+            <div className="google">
+              {props.credentials === null ? (
+                <GoogleLogin
+                  clientId="1083928335773-s4qgaso26307cg7n5kcv91avg3vhkqpf.apps.googleusercontent.com"
+                  buttonText="Login"
+                  onSuccess={response => {
+                    props.login(response);
+                  }}
+                  onFailure={response => {
+                    props.login(response);
+                  }}
+                  cookiePolicy={"single_host_origin"}
+                />
+              ) : (
+                <GoogleLogout
+                  clientId="1083928335773-s4qgaso26307cg7n5kcv91avg3vhkqpf.apps.googleusercontent.com"
+                  buttonText="Logout"
+                  onLogoutSuccess={response => {
+                    props.logout(response);
+                  }}
+                  onFailure={response => {
+                    props.logout(response);
+                  }}
+                />
+              )}
+            </div>
+          </li>
         </ul>
       </div>
       <Search className="web-search" />

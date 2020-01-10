@@ -63,7 +63,7 @@ const teams_in_leagues = [
     league: "Premiership",
     teams: [
       { name: "Northampton Saints", link: "/team/80" },
-      { name: "Bristl Bears", link: "/team/21" },
+      { name: "Bristol Bears", link: "/team/21" },
       { name: "Worcester Warriors", link: "/team/32" },
       { name: "Sale Sharks", link: "/team/28" },
       { name: "London Irish", link: "/team/25" },
