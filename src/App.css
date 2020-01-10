@@ -767,6 +767,10 @@ input[type="time"]::-webkit-clear-button {
     top: 1.3rem;
     right: 1rem;
   }
+
+  .ignore-mobile {
+    display: none;
+  }
 }
 
 @media (min-width: 500px) {

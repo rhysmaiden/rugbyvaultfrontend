@@ -10,7 +10,7 @@ function NavTabs(props) {
   };
 
   return (
-    <div className="NavTabs">
+    <div className="NavTabs ignore-mobile">
       <nav>
         <ul>
           {props.titles &&
