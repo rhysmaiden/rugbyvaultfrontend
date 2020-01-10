@@ -63,7 +63,7 @@ const NavBar_v3 = props => {
               </li>
             </React.Fragment>
           ))}
-          <li>
+          <li className="google-nav">
             <div className="google">
               {props.credentials === null ? (
                 <GoogleLogin

@@ -625,7 +625,7 @@ input[type="time"]::-webkit-clear-button {
 }
 
 .navbar-links li:hover {
-  background-color: teal;
+  background-color: #092c49;
 }
 
 .toggle-button {
@@ -766,7 +766,7 @@ input[type="time"]::-webkit-clear-button {
   } */
 
   .dropdown > ul {
-    background-color: teal;
+    background-color: #092c49;
   }
 
   /* .secondary-link.active {
@@ -815,5 +815,11 @@ input[type="time"]::-webkit-clear-button {
   .mobile-search {
     display: none;
     width: 20rem;
+  }
+
+  .google-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
