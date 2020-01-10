@@ -36,7 +36,9 @@ const NavBar_v3 = () => {
         <span className="bar"></span>
       </a>
 
-      <div className="brand-title">The Rugby Vault</div>
+      <div className="brand-title">
+        <a href="/">The Rugby Vault</a>
+      </div>
 
       <div className={"navbar-links " + (menuOpen && "active")}>
         <ul>
