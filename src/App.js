@@ -59,6 +59,7 @@ const App = () => {
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
       />
+
       <NavBar login={login} logout={logout} credentials={credentials} />
       <div className="App">
         <Router>

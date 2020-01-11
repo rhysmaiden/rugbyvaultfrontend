@@ -183,6 +183,7 @@ body {
 .description-sub {
   display: flex;
   margin-top: 5px;
+  margin-bottom: 10px;
   color: grey;
 }
 .video-description > h1,
@@ -201,6 +202,7 @@ p {
 .box-rating {
   display: flex;
   color: grey;
+  z-index: -1;
 }
 
 .box-rating > p {
@@ -210,6 +212,10 @@ p {
 
 .box-rating > i {
   margin-right: 6px;
+}
+
+.secondary-links {
+  z-index: 999;
 }
 
 .video-grid {
@@ -575,6 +581,7 @@ input[type="time"]::-webkit-clear-button {
   padding-right: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .action-button:hover {
