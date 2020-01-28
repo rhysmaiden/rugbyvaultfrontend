@@ -14,50 +14,8 @@ body {
   padding-right: 16px;
 }
 
-.VideoGrid {
-  margin-bottom: 20px;
-
-  /* background-color: white;
-  border: solid 1px #d3d3d3;
-  padding: 10px; */
-}
-
-.Grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  grid-gap: 16px;
-  background-color: white;
-  border: solid 1px #d3d3d3;
-  padding: 10px;
-  min-height: 505px;
-
-  /* justify-content: space-between; */
-}
-
 .HomePage {
   width: 100%;
-}
-
-.VideoBox {
-}
-
-.VideoBox > img {
-  width: 100%;
-}
-
-.VideoBox > img:hover {
-  cursor: pointer;
-  opacity: "80%";
-}
-
-.VideoBox > h1 {
-  font-size: 16px;
-  margin: 0px;
-}
-
-.VideoBox > p {
-  margin: 0px;
-  color: grey;
 }
 
 /* NAVBAR */
@@ -71,23 +29,12 @@ body {
 }
 
 .navContainer {
-  /* max-width: 1000px;
-  padding-left: 15px;
-  padding-right: 15px;
-  background-color: red;
-  margin-right: auto;
-  margin-left: auto; */
-
   width: 1442px;
-
-  /* margin-right: auto;
-  margin-left: auto; */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   padding-left: 16px;
-
   color: white;
 }
 
@@ -563,15 +510,6 @@ input[type="time"]::-webkit-clear-button {
   padding: 10px;
 }
 
-.Pagination > ul {
-  display: flex;
-  justify-content: center;
-}
-
-.Pagination > ul > li {
-  margin-left: 10px;
-}
-
 .action-button {
   border-radius: 20px;
   background-color: #0d3f69;
@@ -654,7 +592,6 @@ input[type="time"]::-webkit-clear-button {
 }
 
 .search {
-  /* display: none; */
   width: 30px;
   height: 21px;
   margin-left: auto;
@@ -671,18 +608,6 @@ input[type="time"]::-webkit-clear-button {
 .secondary-links {
   display: none;
 }
-
-/* .secondary-link.active {
-  display: block;
-} */
-
-/* .secondary-links {
-  background-color: #0d3f69;
-  padding-top: 3rem;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-} */
 
 @media (max-width: 500px) {
   .video-description {
@@ -707,14 +632,6 @@ input[type="time"]::-webkit-clear-button {
     margin-left: auto;
     margin-right: auto;
   }
-
-  /* .left-nav {
-    width: 100%;
-  }
-
-  .right-nav {
-    width: 100%;
-  } */
 
   .toggle-button {
     display: flex;
@@ -768,17 +685,9 @@ input[type="time"]::-webkit-clear-button {
     padding: 0.5rem 1rem;
   }
 
-  /* .navbar-links.active {
-    display: flex;
-  } */
-
   .dropdown > ul {
     background-color: #092c49;
   }
-
-  /* .secondary-link.active {
-    display: block !important;
-  } */
 
   .secondary-links.active {
     display: block;

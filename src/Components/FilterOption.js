@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import VideoGrid from "./VideoGrid.js";
-import Filter from "./Filter.js";
-import { tsPropertySignature } from "@babel/types";
-import config from "react-global-configuration";
+import "../App.css";
 
 const FilterOption = props => {
   useEffect(() => {

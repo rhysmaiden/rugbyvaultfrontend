@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
-import { tsConstructorType } from "@babel/types";
-import VideoBox from "./VideoBox.js";
+import "../../App.css";
+import "./VideoGrid.css";
+import VideoBox from "../VideoBox.js";
 import Loader from "react-loader-spinner";
 import { useSpring, animated, config } from "react-spring";
 import ReactPaginate from "react-paginate";
@@ -12,7 +12,6 @@ const VideoGrid = props => {
   const animation = useSpring({ opacity: 1, from: { opacity: 1 } });
 
   useEffect(() => {
-    console.log("Changed");
     setVideos(props.data);
   });
 
@@ -81,7 +80,7 @@ const VideoGrid = props => {
             color="#d3d3d3"
             height={100}
             width={100}
-            timeout={3000} //3 secs
+            timeout={30000} //3 secs
           />
         )}
       </div>

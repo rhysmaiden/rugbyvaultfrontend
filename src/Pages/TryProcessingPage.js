@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import "./App.css";
-import VideoGrid from "./VideoGrid.js";
-import Chart from "./Chart.js";
+import "../App.css";
 import config from "react-global-configuration";
 import YouTube from "react-youtube";
 

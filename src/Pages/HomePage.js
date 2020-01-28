@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import VideoGrid from "./VideoGrid.js";
+import "../App.css";
+import VideoGrid from "../Components/VideoGrid/VideoGrid.js";
 import config from "react-global-configuration";
-import NavTabs from "./NavTabs.js";
-import { tabs, tab_slugs } from "./league_data.js";
+import NavTabs from "../Components/NavTabs.js";
+import { tabs, tab_slugs } from "../league_data.js";
 
 const HomePage = () => {
   const [data, setData] = useState([]);

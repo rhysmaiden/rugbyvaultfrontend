@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import VideoGrid from "./VideoGrid.js";
+import "../App.css";
+import VideoGrid from "../Components/VideoGrid/VideoGrid.js";
 import { tsPropertySignature } from "@babel/types";
-import Filter from "./Filter.js";
+import Filter from "../Components/Filter.js";
 import config from "react-global-configuration";
 
 const Chart = props => {

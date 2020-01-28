@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import { isUserWhitespacable } from "@babel/types";
+import "../App.css";
 import config from "react-global-configuration";
 
 // TODO: Make styling spserate from app.css

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 
-import NavBar from "./NavBar_v3.js";
-import HomePage from "./HomePage.js";
-import VideoPlayer from "./VideoPlayer.js";
-import TeamPage from "./TeamPage.js";
-import PlayerPage from "./PlayerPage.js";
+import NavBar from "./Components/NavBar/NavBar_v3.js";
+import HomePage from "./Pages/HomePage.js";
+import VideoPlayer from "./Pages/VideoPlayer.js";
+import TeamPage from "./Pages/TeamPage.js";
+import PlayerPage from "./Pages/PlayerPage.js";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
-import Chart from "./Chart.js";
-import TryProcessingPage from "./TryProcessingPage.js";
-import MatchesPage from "./MatchesPage.js";
-import TriesPage from "./TriesPage.js";
+import Chart from "./Pages/Chart.js";
+import TryProcessingPage from "./Pages/TryProcessingPage.js";
+import MatchesPage from "./Pages/MatchesPage.js";
+import TriesPage from "./Pages/TriesPage.js";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import config from "react-global-configuration";

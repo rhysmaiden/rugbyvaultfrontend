@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import VideoGrid from "./VideoGrid.js";
-import Filter from "./Filter.js";
+import "../App.css";
 import FilterOption from "./FilterOption.js";
-import { tsPropertySignature } from "@babel/types";
-import config from "react-global-configuration";
 
 const FilterPanel = props => {
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "../App.css";
 import Rating from "react-rating";
 import { useSpring, animated, config } from "react-spring";
 

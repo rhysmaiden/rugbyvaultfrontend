@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import VideoGrid from "./VideoGrid.js";
+import "../App.css";
+import VideoGrid from "../Components/VideoGrid/VideoGrid.js";
 import Rating from "react-rating";
 import config from "react-global-configuration";
 

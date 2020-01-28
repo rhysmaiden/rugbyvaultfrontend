@@ -1,0 +1,41 @@
+.VideoGrid {
+  margin-bottom: 20px;
+}
+
+.Grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-gap: 16px;
+  background-color: white;
+  border: solid 1px #d3d3d3;
+  padding: 10px;
+  min-height: 505px;
+}
+
+.VideoBox > img {
+  width: 100%;
+}
+
+.VideoBox > img:hover {
+  cursor: pointer;
+  opacity: "80%";
+}
+
+.VideoBox > h1 {
+  font-size: 16px;
+  margin: 0px;
+}
+
+.VideoBox > p {
+  margin: 0px;
+  color: grey;
+}
+
+.Pagination > ul {
+  display: flex;
+  justify-content: center;
+}
+
+.Pagination > ul > li {
+  margin-left: 10px;
+}

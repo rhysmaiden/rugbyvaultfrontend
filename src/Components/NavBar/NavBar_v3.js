@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import { teams_in_leagues } from "./league_data.js";
-import Search from "./Search.js";
+import "../../App.css";
+import "./NavBar.css";
+import { teams_in_leagues } from "../../league_data.js";
+import Search from "../Search.js";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 
 const NavBar_v3 = props => {

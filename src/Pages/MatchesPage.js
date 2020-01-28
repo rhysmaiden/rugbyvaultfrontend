@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import VideoGrid from "./VideoGrid.js";
-import { tsPropertySignature } from "@babel/types";
-import Filter from "./Filter.js";
+import "../App.css";
+import VideoGrid from "../Components/VideoGrid/VideoGrid.js";
+import Filter from "../Components/Filter.js";
 import config from "react-global-configuration";
-import FilterPanel from "./FilterPanel.js";
-import ReactPaginate from "react-paginate";
+import FilterPanel from "../Components/FilterPanel.js";
 
 const MatchesPage = props => {
   const [data, setData] = useState([]);
@@ -46,6 +44,10 @@ const MatchesPage = props => {
           leagueString += option.name + ",";
         }
       });
+    }
+
+    if (props.league) {
+      leagueString = props.league;
     }
 
     yearString = yearString.slice(0, -1);

@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import VideoGrid from "./VideoGrid.js";
-import { tsPropertySignature } from "@babel/types";
+import React from "react";
+import "../App.css";
 
 const Filter = props => {
   const changeFilter = e => {
