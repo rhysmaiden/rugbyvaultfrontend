@@ -28,10 +28,7 @@ const VideoGrid = props => {
   });
 
   return (
-    <animated.div
-      style={props.changeData ? fadeOut : fadeIn}
-      className="VideoGrid"
-    >
+    <div style={props.changeData ? fadeOut : fadeIn} className="VideoGrid">
       <p>{props.total}</p>
       <div className="Grid">
         {videos ? (
@@ -94,7 +91,7 @@ const VideoGrid = props => {
           />
         )}
       </div>
-    </animated.div>
+    </div>
   );
 };
 

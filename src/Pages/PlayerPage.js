@@ -3,7 +3,7 @@ import "../App.css";
 import VideoGrid from "../Components/VideoGrid/VideoGrid.js";
 import Filter from "../Components/Filter.js";
 import FilterPanel from "../Components/FilterPanel";
-import { tsPropertySignature } from "@babel/types";
+
 import config from "react-global-configuration";
 
 const PlayerPage = props => {

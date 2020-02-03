@@ -7,8 +7,8 @@
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   grid-gap: 16px;
   background-color: white;
-  border: solid 1px #d3d3d3;
-  padding: 10px;
+  /* border: solid 1px #d3d3d3; */
+  /* padding: 10px; */
   min-height: 505px;
 }
 

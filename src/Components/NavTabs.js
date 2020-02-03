@@ -15,12 +15,9 @@ function NavTabs(props) {
         <ul>
           {props.titles &&
             props.titles.map((title, index) => (
-              <a
-                onClick={() => changeTab(index)}
-                id={activeTab === index && "activeTab"}
-              >
-                {title}
-              </a>
+              <div id={activeTab === index && "activeTab"}>
+                <a onClick={() => changeTab(index)}>{title}</a>
+              </div>
             ))}
         </ul>
       </nav>

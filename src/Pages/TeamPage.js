@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import VideoGrid from "../Components/VideoGrid/VideoGrid.js";
-import { tsPropertySignature } from "@babel/types";
+
 import Filter from "../Components/Filter";
 import config from "react-global-configuration";
 import FilterPanel from "../Components/FilterPanel.js";

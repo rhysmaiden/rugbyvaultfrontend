@@ -440,26 +440,31 @@ input[type="time"]::-webkit-clear-button {
 
 .NavTabs {
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #d3d3d3;
 }
 
 .NavTabs > nav {
   background-color: white;
   padding-left: 0px !important;
-  border-bottom: 1px solid #d3d3d3;
+  padding: 0px;
   width: 100%;
+  /* padding-bottom: 10px; */
 }
 
 .NavTabs > nav > ul {
   padding: 0px;
   margin-bottom: 0px;
+  display: flex;
 }
 
-.NavTabs > nav > ul > a {
+.NavTabs > nav > ul > div {
   margin-right: 25px;
+  background-color: "green";
+  padding-bottom: 5px;
 }
 
-.NavTabs > nav > ul > a:hover {
+.NavTabs > nav > ul > div:hover {
   cursor: pointer;
   border-bottom: 5px solid #0d3f69;
   color: black !important;
