@@ -28,7 +28,9 @@ function VideoBox(props) {
       {props.link && (
         <React.Fragment>
           <img onClick={openLink} src={props.image}></img>
-          <a href={props.titleLink}>{props.title}</a>
+          <a className="box-link" href={props.titleLink}>
+            {props.title}
+          </a>
           <p>{props.subtitle}</p>
           {/* <div className="Rating">
             <Rating readonly initialRating={props.rating} />

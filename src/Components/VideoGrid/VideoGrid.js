@@ -44,6 +44,7 @@ const VideoGrid = props => {
                 title={
                   video.home_team.team_name + " vs " + video.away_team.team_name
                 }
+                titleLink={"/video/match/" + video.id}
                 subtitle={video.date}
                 rating={video.avg_rating}
                 rating_count={video.rating_count}

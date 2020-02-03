@@ -37,6 +37,7 @@ const HomePage = () => {
 
     const jsonData = await response.json();
     console.log(jsonData);
+
     setData(jsonData);
     setDataLoaded(true);
     setChangeData(false);

@@ -198,7 +198,7 @@ a {
   align-items: center;
 }
 
-a:hover {
+.box-link:hover {
   color: grey;
 }
 
@@ -529,7 +529,7 @@ input[type="time"]::-webkit-clear-button {
 
 .action-button:hover {
   cursor: pointer;
-  border: solid white 2px;
+  background-color: black;
 }
 
 .video-grid-actions {

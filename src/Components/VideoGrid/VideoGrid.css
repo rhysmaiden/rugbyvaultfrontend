@@ -39,3 +39,7 @@
 .Pagination > ul > li {
   margin-left: 10px;
 }
+
+.Pagination {
+  margin-top: 70px;
+}
