@@ -11,6 +11,7 @@ import Chart from "./Pages/Chart.js";
 import TryProcessingPage from "./Pages/TryProcessingPage.js";
 import MatchesPage from "./Pages/MatchesPage.js";
 import TriesPage from "./Pages/TriesPage.js";
+import ReactGa from "react-ga";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import config from "react-global-configuration";
@@ -27,6 +28,8 @@ const App = () => {
 
   useEffect(() => {
     // document.title = "The Rugby Vault";
+    ReactGa.initialize("UA-150979790-1");
+    ReactGa.pageview(window.location.pathname + window.location.search);
     getCredentials();
   }, []);
 
