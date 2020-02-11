@@ -37,21 +37,11 @@ const VideoPlayer = props => {
       setVid(jsonData.try);
       setGrid(jsonData.player_tries);
     } else {
-      console.log("IS A MATCH");
-
-      var googleId = 0;
-
-      if (props.googleId != "") {
-        googleId = props.googleId;
-      }
-
       const request =
         config.get("backend_url") +
         "video?type=match" +
         "&id=" +
-        props.routeParams.match.params.id +
-        "&googleId=" +
-        googleId;
+        props.routeParams.match.params.id;
       const response = await fetch(request, {
         mode: "cors"
       });
@@ -63,23 +53,16 @@ const VideoPlayer = props => {
 
       setVid(jsonData.match);
       setGrid(jsonData.matches);
-      setUserRating(jsonData.rating);
+
       setTries(jsonData.tries);
     }
   };
 
   const sendRating = async rating => {
     const data = {
-      googleId: props.googleId,
       id: props.routeParams.match.params.id,
       rating: rating
     };
-
-    console.log(props.googleId);
-    if (props.googleId == "") {
-      setError("Please Login to rate");
-      return;
-    }
 
     setError("");
 

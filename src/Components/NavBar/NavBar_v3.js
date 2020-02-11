@@ -64,34 +64,6 @@ const NavBar_v3 = props => {
               </li>
             </React.Fragment>
           ))}
-          <li className="google-nav">
-            <div className="google">
-              {props.credentials === null ? (
-                <GoogleLogin
-                  clientId="1083928335773-s4qgaso26307cg7n5kcv91avg3vhkqpf.apps.googleusercontent.com"
-                  buttonText="Login"
-                  onSuccess={response => {
-                    props.login(response);
-                  }}
-                  onFailure={response => {
-                    props.login(response);
-                  }}
-                  cookiePolicy={"single_host_origin"}
-                />
-              ) : (
-                <GoogleLogout
-                  clientId="1083928335773-s4qgaso26307cg7n5kcv91avg3vhkqpf.apps.googleusercontent.com"
-                  buttonText="Logout"
-                  onLogoutSuccess={response => {
-                    props.logout(response);
-                  }}
-                  onFailure={response => {
-                    props.logout(response);
-                  }}
-                />
-              )}
-            </div>
-          </li>
         </ul>
       </div>
       <Search className="web-search" />
