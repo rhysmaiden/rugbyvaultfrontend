@@ -11,6 +11,7 @@ import Chart from "./Pages/Chart.js";
 import TryProcessingPage from "./Pages/TryProcessingPage.js";
 import MatchesPage from "./Pages/MatchesPage.js";
 import TriesPage from "./Pages/TriesPage.js";
+import VideoPlayerList from "./Pages/VideoPlayerList.js";
 import ReactGa from "react-ga";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -79,6 +80,7 @@ const App = () => {
           <Route path="/tryprocessing/:id?" component={TryProcessingPage} />
           <Route path="/matches" component={MatchesPage} />
           <Route path="/tries" component={TriesPage} />
+          <Route path="/vidlist" component={VideoPlayerList} />
         </Router>
       </div>
     </React.Fragment>

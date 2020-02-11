@@ -744,3 +744,7 @@ input[type="time"]::-webkit-clear-button {
     align-items: center;
   }
 }
+
+.hidden {
+  display: none;
+}
