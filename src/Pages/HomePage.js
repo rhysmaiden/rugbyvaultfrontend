@@ -10,7 +10,8 @@ const HomePage = () => {
   const [changeData, setChangeData] = useState(false);
   const [matchIndex, setMatchIndex] = useState(0);
   const [tryIndex, setTryIndex] = useState(0);
-  const [dataLoaded, setDataLoaded] = useState(false);
+  const [matchDataLoaded, setMatchDataLoaded] = useState(false);
+  const [tryDataLoaded, setTryDataLoaded] = useState(false);
 
   useEffect(() => {
     getData(0);
@@ -18,6 +19,14 @@ const HomePage = () => {
 
   const getData = async (index, bar) => {
     setChangeData(true);
+
+    if (bar == 0) {
+      setData({ tries: data.tries, matches: [] });
+      setMatchDataLoaded(false);
+    } else {
+      setData({ tries: [], matches: data.matches });
+      setTryDataLoaded(false);
+    }
 
     var request = config.get("backend_url") + "highlights/?";
 
@@ -32,67 +41,70 @@ const HomePage = () => {
     }
 
     const response = await fetch(request, {
-      mode: "cors"
+      mode: "cors",
     });
 
     const jsonData = await response.json();
-    console.log(jsonData);
 
     setData(jsonData);
-    setDataLoaded(true);
+
     setChangeData(false);
+
+    if (bar == 0) {
+      setMatchDataLoaded(true);
+    } else {
+      setTryDataLoaded(true);
+    }
   };
 
   return (
-    dataLoaded && (
-      <div className="HomePage">
-        <h3 className="grid-title">Recent Matches</h3>
+    <div className="HomePage">
+      <h3 className="grid-title">Recent Matches</h3>
+      <NavTabs
+        titles={tabs}
+        activeTab={0}
+        changeTab={(index) => {
+          getData(index, 0);
+        }}
+      />
 
-        <NavTabs
-          titles={tabs}
-          activeTab={0}
-          changeTab={index => {
-            getData(index, 0);
+      <VideoGrid
+        key="2"
+        data={data.matches}
+        changeData={changeData}
+        loaded={matchDataLoaded}
+        type="match"
+      />
+      <div className="video-grid-actions">
+        <button
+          className="action-button blue-button"
+          onClick={() => {
+            window.location = "/matches";
           }}
-        />
-        <VideoGrid
-          key="2"
-          data={data.matches}
-          changeData={changeData}
-          type="match"
-        />
-        <div className="video-grid-actions">
-          <button
-            className="action-button blue-button"
-            onClick={() => {
-              window.location = "/matches";
-            }}
-          >
-            View more
-          </button>
-        </div>
-
-        <h3 className="grid-title">Recent Tries</h3>
-        <NavTabs
-          titles={tabs}
-          activeTab={0}
-          changeTab={index => {
-            getData(index, 1);
-          }}
-        />
-        <VideoGrid key="1" data={data.tries} type="try" />
-        <div className="video-grid-actions">
-          <button
-            className="action-button blue-button"
-            onClick={() => {
-              window.location = "/tries";
-            }}
-          >
-            View more
-          </button>
-        </div>
+        >
+          View more
+        </button>
       </div>
-    )
+      <h3 className="grid-title">Recent Tries</h3>
+      <NavTabs
+        titles={tabs}
+        activeTab={0}
+        changeTab={(index) => {
+          getData(index, 1);
+        }}
+      />
+      <VideoGrid key="1" data={data.tries} type="try" loaded={tryDataLoaded} />
+      <div className="video-grid-actions">
+        <button
+          className="action-button blue-button"
+          onClick={() => {
+            window.location = "/tries";
+          }}
+        >
+          View more
+        </button>
+      </div>
+    </div>
   );
 };
 

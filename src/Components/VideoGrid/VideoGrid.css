@@ -12,6 +12,12 @@
   min-height: 505px;
 }
 
+.LoaderContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .VideoBox > img {
   width: 100%;
 }

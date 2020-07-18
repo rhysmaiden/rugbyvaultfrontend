@@ -6,7 +6,7 @@ import Loader from "react-loader-spinner";
 import { useSpring, animated, config } from "react-spring";
 import ReactPaginate from "react-paginate";
 
-const VideoGrid = props => {
+const VideoGrid = (props) => {
   const [videos, setVideos] = useState([]);
 
   const animation = useSpring({ opacity: 1, from: { opacity: 1 } });
@@ -15,24 +15,12 @@ const VideoGrid = props => {
     setVideos(props.data);
   });
 
-  const fadeIn = useSpring({
-    opacity: 1,
-    from: { opacity: 0 },
-    config: { duration: 2000 }
-  });
-
-  const fadeOut = useSpring({
-    opacity: 0,
-    from: { opacity: 1 },
-    config: { duration: 2000 }
-  });
-
   return (
-    <div style={props.changeData ? fadeOut : fadeIn} className="VideoGrid">
+    <div className="VideoGrid">
       <p>{props.total}</p>
       <div className="Grid">
-        {videos ? (
-          videos.map(video =>
+        {props.loaded ? (
+          videos.map((video) =>
             props.type === "match" ? (
               <VideoBox
                 image={
@@ -53,10 +41,7 @@ const VideoGrid = props => {
               <VideoBox
                 image={
                   "https://img.youtube.com/vi/" +
-                  video.video_link
-                    .split("d/")
-                    .pop()
-                    .split("?")[0] +
+                  video.video_link.split("d/").pop().split("?")[0] +
                   "/0.jpg"
                 }
                 link={"/video/try/" + video.id}
@@ -73,13 +58,9 @@ const VideoGrid = props => {
             )
           )
         ) : (
-          <Loader
-            type="RevolvingDot"
-            color="#d3d3d3"
-            height={100}
-            width={100}
-            timeout={30000} //3 secs
-          />
+          <div className="LoaderContainer">
+            <Loader type="Oval" color="#d3d3d3" height={100} width={100} />
+          </div>
         )}
       </div>
       <div className="Pagination">
