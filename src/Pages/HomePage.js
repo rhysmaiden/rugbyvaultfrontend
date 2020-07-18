@@ -18,13 +18,12 @@ const HomePage = () => {
   }, []);
 
   const getData = async (index, bar) => {
-    setChangeData(true);
-
     if (bar == 0) {
-      setData({ tries: data.tries, matches: [] });
       setMatchDataLoaded(false);
+    } else if (bar == 1) {
+      setTryDataLoaded(false);
     } else {
-      setData({ tries: [], matches: data.matches });
+      setMatchDataLoaded(false);
       setTryDataLoaded(false);
     }
 
@@ -48,11 +47,12 @@ const HomePage = () => {
 
     setData(jsonData);
 
-    setChangeData(false);
-
     if (bar == 0) {
       setMatchDataLoaded(true);
+    } else if (bar == 1) {
+      setTryDataLoaded(true);
     } else {
+      setMatchDataLoaded(true);
       setTryDataLoaded(true);
     }
   };
