@@ -6,11 +6,12 @@ import FilterPanel from "../Components/FilterPanel";
 
 import config from "react-global-configuration";
 
-const PlayerPage = props => {
+const PlayerPage = (props) => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState("date");
   const [filterOptions, setFilterOptions] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     getData();
@@ -23,7 +24,8 @@ const PlayerPage = props => {
   }, [data]);
 
   const getData = async () => {
-    console.log("Run Get Data");
+    setLoaded(false);
+
     var yearString = "";
     var teamString = "";
     var leagueString = "";
@@ -31,19 +33,19 @@ const PlayerPage = props => {
     var optionStrings = [];
 
     if (filterOptions.length != 0) {
-      filterOptions[0].options.map(option => {
+      filterOptions[0].options.map((option) => {
         if (option.checked) {
           yearString += option.name + ",";
         }
       });
 
-      filterOptions[1].options.map(option => {
+      filterOptions[1].options.map((option) => {
         if (option.checked) {
           teamString += option.name + ",";
         }
       });
 
-      filterOptions[2].options.map(option => {
+      filterOptions[2].options.map((option) => {
         if (option.checked) {
           leagueString += option.name + ",";
         }
@@ -69,7 +71,7 @@ const PlayerPage = props => {
       "&page=" +
       pageNumber;
     const response = await fetch(request, {
-      mode: "cors"
+      mode: "cors",
     });
 
     const jsonData = await response.json();
@@ -77,6 +79,7 @@ const PlayerPage = props => {
     console.log(jsonData);
 
     setData(jsonData);
+    setLoaded(true);
   };
 
   function createOptions() {
@@ -86,31 +89,31 @@ const PlayerPage = props => {
     var teams = [];
     var leagues = [];
 
-    data.yearFilter.map(year => {
+    data.yearFilter.map((year) => {
       years.push({ name: year.value, checked: year.checked });
     });
 
-    data.teamFilter.map(team => {
+    data.teamFilter.map((team) => {
       teams.push({ name: team.value, checked: team.checked });
     });
 
-    data.leagueFilter.map(league => {
+    data.leagueFilter.map((league) => {
       leagues.push({ name: league.value, checked: league.checked });
     });
 
     options.push({
       name: "Year",
-      options: years
+      options: years,
     });
 
     options.push({
       name: "Team",
-      options: teams
+      options: teams,
     });
 
     options.push({
       name: "League",
-      options: leagues
+      options: leagues,
     });
 
     setFilterOptions(options);
@@ -119,12 +122,12 @@ const PlayerPage = props => {
   const changeFilter = (name, option) => {
     console.log("Run Change Filter");
     var temp_filter_options = [];
-    filterOptions.map(option => {
+    filterOptions.map((option) => {
       temp_filter_options.push(option);
     });
-    temp_filter_options.map(filterOption => {
+    temp_filter_options.map((filterOption) => {
       if (filterOption.name == name) {
-        filterOption.options.map(foption => {
+        filterOption.options.map((foption) => {
           if (option == foption.name) {
             foption.checked = !foption.checked;
           }
@@ -139,7 +142,7 @@ const PlayerPage = props => {
     }
   };
 
-  const changePage = pageNumber => {
+  const changePage = (pageNumber) => {
     setPageNumber(pageNumber.selected + 1);
   };
 
@@ -152,7 +155,7 @@ const PlayerPage = props => {
           <div className="grid-heading">
             <h1>{data.player && data.player.name}</h1>
             <Filter
-              changeFilter={e => {
+              changeFilter={(e) => {
                 setFilter(e);
               }}
               options={["date", "rating"]}
@@ -167,6 +170,7 @@ const PlayerPage = props => {
         <VideoGrid
           key="1"
           data={data.tries}
+          loaded={loaded}
           type="try"
           changePage={changePage}
           pageCount={data.pageCount}
