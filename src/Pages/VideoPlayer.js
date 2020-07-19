@@ -105,10 +105,7 @@ const VideoPlayer = (props) => {
   };
   return (
     <div className="VideoPlayer">
-      <div
-        className="video-con"
-        style={{ paddingBottom: iframeLoaded ? "56.25%" : "0%" }}
-      >
+      <div className="video-con">
         {videoDetailsLoaded && (
           <iframe
             src={
