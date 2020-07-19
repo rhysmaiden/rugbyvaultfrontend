@@ -3,16 +3,22 @@ import "../App.css";
 import VideoGrid from "../Components/VideoGrid/VideoGrid.js";
 import Rating from "react-rating";
 import config from "react-global-configuration";
+import Loader from "react-loader-spinner";
 
 //TODO: Refactor to not duplicate code
 
-const VideoPlayer = props => {
+const VideoPlayer = (props) => {
   const [vid, setVid] = useState({});
   const [grid, setGrid] = useState([]);
   const [userRating, setUserRating] = useState([]);
   const [error, setError] = useState("");
   const [tries, setTries] = useState([]);
   const [showTries, setShowTries] = useState(false);
+
+  const [videoDetailsLoaded, setVideoDetailsLoaded] = useState(false);
+  const [triesLoaded, setTriesLoaded] = useState(false);
+  const [matchesLoaded, setMatchesLoaded] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
 
   useEffect(() => {
     getVideo();
@@ -26,16 +32,16 @@ const VideoPlayer = props => {
         "&id=" +
         props.routeParams.match.params.id;
       const response = await fetch(request, {
-        mode: "cors"
+        mode: "cors",
       });
 
-      console.log(response);
-
       const jsonData = await response.json();
-      console.log(jsonData);
 
       setVid(jsonData.try);
+      setVideoDetailsLoaded(true);
+
       setGrid(jsonData.player_tries);
+      setTriesLoaded(true);
     } else {
       const request =
         config.get("backend_url") +
@@ -43,25 +49,26 @@ const VideoPlayer = props => {
         "&id=" +
         props.routeParams.match.params.id;
       const response = await fetch(request, {
-        mode: "cors"
+        mode: "cors",
       });
 
-      console.log(response);
-
       const jsonData = await response.json();
-      console.log(jsonData);
 
       setVid(jsonData.match);
+      setVideoDetailsLoaded(true);
+
       setGrid(jsonData.matches);
+      setMatchesLoaded(true);
 
       setTries(jsonData.tries);
+      setTriesLoaded(true);
     }
   };
 
-  const sendRating = async rating => {
+  const sendRating = async (rating) => {
     const data = {
       id: props.routeParams.match.params.id,
-      rating: rating
+      rating: rating,
     };
 
     setError("");
@@ -75,15 +82,15 @@ const VideoPlayer = props => {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
   };
 
   const sendError = async () => {
     const data = {
       id: props.routeParams.match.params.id,
-      type: props.routeParams.match.params.type
+      type: props.routeParams.match.params.type,
     };
 
     const url = config.get("backend_url") + "report/";
@@ -92,24 +99,36 @@ const VideoPlayer = props => {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
   };
   return (
     <div className="VideoPlayer">
-      <div className="video-con">
-        <iframe
-          src={
-            vid.video_link &&
-            vid.video_link.replace("watch?v=", "embed/") + "?autoplay=1"
-          }
-          frameborder="0"
-          width="100%"
-          height="100%"
-          allowfullscreen
-        ></iframe>{" "}
+      <div
+        className="video-con"
+        style={{ paddingBottom: iframeLoaded ? "56.25%" : "0%" }}
+      >
+        {videoDetailsLoaded && (
+          <iframe
+            src={
+              vid.video_link &&
+              vid.video_link.replace("watch?v=", "embed/") + "?autoplay=1"
+            }
+            frameborder="0"
+            width="100%"
+            height="100%"
+            allowfullscreen
+            onLoad={(e) => setIframeLoaded(true)}
+          ></iframe>
+        )}
       </div>
+
+      {!iframeLoaded && (
+        <div className="LoaderContainer">
+          <Loader type="Oval" color="#d3d3d3" height={100} width={100} />
+        </div>
+      )}
 
       {props.routeParams.match &&
       props.routeParams.match.params.type === "try" ? (
@@ -160,7 +179,13 @@ const VideoPlayer = props => {
               />
             </div>
           </div>
-          <VideoGrid title="Other Tries" key="3" data={grid} type="try" />
+          <VideoGrid
+            title="Other Tries"
+            key="3"
+            data={grid}
+            type="try"
+            loaded={triesLoaded}
+          />
         </React.Fragment>
       ) : (
         vid.home_team && (
@@ -211,16 +236,27 @@ const VideoPlayer = props => {
             <button
               className="action-button blue-button"
               onClick={() => {
-                console.log(tries);
                 setShowTries(!showTries);
               }}
             >
               {showTries ? "Hide" : "Show match tries"}
             </button>
             {showTries && (
-              <VideoGrid title="Tries" key="9" data={tries} type="try" />
+              <VideoGrid
+                title="Tries"
+                key="9"
+                data={tries}
+                type="try"
+                loaded={triesLoaded}
+              />
             )}
-            <VideoGrid title="Match History" key="4" data={grid} type="match" />
+            <VideoGrid
+              title="Match History"
+              key="4"
+              data={grid}
+              type="match"
+              loaded={matchesLoaded}
+            />
           </React.Fragment>
         )
       )}
