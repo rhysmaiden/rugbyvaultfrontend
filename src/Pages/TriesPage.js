@@ -159,8 +159,8 @@ const TriesPage = (props) => {
           changeFilter={changeFilter}
         />
         <VideoGrid
-          key="1"
           data={data.tries}
+          loaded={loaded}
           type="try"
           changePage={changePage}
           pageCount={data.pageCount}

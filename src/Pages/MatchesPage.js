@@ -163,7 +163,7 @@ const MatchesPage = (props) => {
           changeFilter={changeFilter}
         />
         <VideoGrid
-          key="1"
+          loaded={loaded}
           data={data.matches}
           type="match"
           changePage={changePage}

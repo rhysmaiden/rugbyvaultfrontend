@@ -12,8 +12,10 @@ const VideoGrid = (props) => {
   const animation = useSpring({ opacity: 1, from: { opacity: 1 } });
 
   useEffect(() => {
+    console.log("Gets data");
+    console.log(props.data);
     setVideos(props.data);
-  });
+  }, [props]);
 
   return (
     <div className="VideoGrid">
