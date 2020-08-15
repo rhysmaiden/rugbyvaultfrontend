@@ -1,50 +1,68 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import "../App.css";
 import config from "react-global-configuration";
 import YouTube from "react-youtube";
 
-const TryProcessingPage = props => {
+const TryProcessingPage = (props) => {
   const [tries, setTries] = useState([]);
   const [match, setMatch] = useState({});
   const [currentTime, setCurrentTime] = useState(0);
+  const [playingVideo, setPlayingVideo] = useState(false);
+  const playingVideoRef = useRef(playingVideo);
+  const currentTimeRef = useRef(currentTime);
+  const youtubePlayer = useRef(null);
 
   useEffect(() => {
     getData();
-    document.addEventListener("keypress", handleKeyPress);
+    document.addEventListener("keydown", handleKeyDown);
   }, []);
 
-  const handleKeyPress = useCallback(event => {
-    console.log(event.keyCode);
-
+  const handleKeyDown = async (event) => {
     if (event.keyCode == 32) {
-      //Focus back on youube video and play
-      return;
-    } else if (event.keyCode == 107) {
-      //Log current time
-      console.log(currentTime);
+      // Key Space
+      event.preventDefault();
+      playingVideoRef.current
+        ? youtubePlayer.current.internalPlayer.pauseVideo()
+        : youtubePlayer.current.internalPlayer.playVideo();
+
+      console.log("reached");
+      playingVideoRef.current = !playingVideoRef.current;
+    } else if (event.keyCode == 76) {
+      // Key L
+      setTime();
+    } else if (event.keyCode == 85) {
+      // Key U
+      undo();
+    } else if (event.keyCode == 37) {
+      // Key Left
+      var current_time = await youtubePlayer.current.internalPlayer.getCurrentTime();
+      youtubePlayer.current.internalPlayer.seekTo((await current_time) - 5);
+    } else if (event.keyCode == 39) {
+      // Key Right
+      var current_time = await youtubePlayer.current.internalPlayer.getCurrentTime();
+      youtubePlayer.current.internalPlayer.seekTo((await current_time) + 5);
     }
-  });
+  };
 
   const getData = async () => {
     console.log(props);
     const request =
       config.get("backend_url") + "processing?id=" + props.match.params.id;
     const response = await fetch(request, {
-      mode: "cors"
+      mode: "cors",
     });
 
     const jsonData = await response.json();
-    console.log(jsonData);
     setTries(jsonData.players);
     setMatch(jsonData.match);
   };
 
-  const submitTries = e => {
+  const submitTries = (e) => {
     e.preventDefault();
 
     var index = 0;
 
-    tries.map(trie => {
+    tries.map((trie) => {
       var start_min = e.target[index].value;
       var start_sec = e.target[index + 1].value;
       var end_min = e.target[index + 2].value;
@@ -59,20 +77,41 @@ const TryProcessingPage = props => {
     sendTriesToBackend();
   };
 
+  const undo = () => {
+    var start_mins = document.getElementsByClassName("start-min");
+    var start_secs = document.getElementsByClassName("start-sec");
+    var end_mins = document.getElementsByClassName("end-min");
+    var end_secs = document.getElementsByClassName("end-sec");
+
+    for (var i = 0; i < start_mins.length; i++) {
+      if (start_mins[i].value.match(/^[0-9]+$/) == null) {
+        end_mins[i - 1].value = null;
+        end_secs[i - 1].value = null;
+        break;
+      }
+
+      if (end_mins[i].value.match(/^[0-9]+$/) == null) {
+        start_mins[i].value = null;
+        start_secs[i].value = null;
+        break;
+      }
+    }
+  };
+
   const sendTriesToBackend = async () => {
     const request = config.get("backend_url") + "addtry/";
 
     const data = {
       tries: tries,
-      match: match
+      match: match,
     };
 
     const response = await fetch(request, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
 
     window.location.reload();
@@ -81,7 +120,7 @@ const TryProcessingPage = props => {
   const sendError = async () => {
     const data = {
       id: match.id,
-      type: "match"
+      type: "match",
     };
 
     const url = config.get("backend_url") + "report/";
@@ -90,32 +129,25 @@ const TryProcessingPage = props => {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
 
     window.location.reload();
   };
 
   const setTime = () => {
-    var currentTotalSeconds = Math.floor(currentTime);
+    var currentTotalSeconds = Math.floor(currentTimeRef.current);
     var currentMinutes = Math.floor(currentTotalSeconds / 60);
     var currentSeconds = currentTotalSeconds % 60;
-
-    console.log(currentMinutes);
-    console.log(currentSeconds);
 
     var start_mins = document.getElementsByClassName("start-min");
     var start_secs = document.getElementsByClassName("start-sec");
     var end_mins = document.getElementsByClassName("end-min");
     var end_secs = document.getElementsByClassName("end-sec");
 
-    console.log(start_mins.length);
     for (var i = 0; i < start_mins.length; i++) {
-      // console.log(start_mins[i].value);
-      console.log(start_mins[i].value.match(/^[0-9]+$/) != null);
       if (start_mins[i].value.match(/^[0-9]+$/) == null) {
-        console.log("WORKED");
         start_mins[i].value = currentMinutes;
         start_secs[i].value = currentSeconds;
 
@@ -130,7 +162,6 @@ const TryProcessingPage = props => {
           start_mins[i + 1].value = currentMinutes;
           start_secs[i + 1].value = currentSeconds;
         } catch (error) {
-          console.log("Last try");
           document.getElementsByClassName("submitButton")[1].click();
         }
 
@@ -139,27 +170,27 @@ const TryProcessingPage = props => {
     }
   };
 
-  const paused = e => {
-    console.log("paused");
-    console.log(typeof e.target.getCurrentTime());
-    console.log(typeof 0);
-    setCurrentTime(e.target.getCurrentTime());
+  const paused = async (e) => {
+    currentTimeRef.current = await e.target.getCurrentTime();
+  };
 
-    // 1. UnFocus
-    //window.focus();
+  const opts = {
+    maxWidth: 500,
+    width: window.innerWidth > 500 ? 500 : window.innerWidth - 40,
+    playerVars: {
+      autoplay: 0,
+    },
   };
 
   return (
     <div className="VideoPlayer">
-      <div className="video-con">
+      <div className="processing-video-con">
         <YouTube
           id="youtube"
           videoId={match.video_link && match.video_link.split("=")[1]} // defaults -> null
-          // containerClassName={"video-con"} // defaults -> ''
-
-          // onPlay={} // defaults -> noop
           onPause={paused} // defaults -> noop
-          onKeyPress={paused}
+          ref={youtubePlayer}
+          opts={opts}
         />
       </div>
       <button className="submitButton" onClick={setTime}>
@@ -183,7 +214,7 @@ const TryProcessingPage = props => {
           <p className="form-heading">Error</p>
 
           {tries &&
-            tries.map(trie => (
+            tries.map((trie) => (
               <React.Fragment>
                 <p className="form-name">
                   {trie.player_name + " (" + trie.time + "')"}
