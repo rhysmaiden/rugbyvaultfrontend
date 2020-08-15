@@ -119,13 +119,15 @@ const VideoPlayer = (props) => {
             onLoad={(e) => setIframeLoaded(true)}
           ></iframe>
         )}
+        {!iframeLoaded && (
+          <div
+            className="LoaderContainer"
+            style={{ height: "100%", display: "flex", alignItems: "center" }}
+          >
+            <Loader type="Oval" color="#d3d3d3" height={100} width={100} />
+          </div>
+        )}
       </div>
-
-      {!iframeLoaded && (
-        <div className="LoaderContainer">
-          <Loader type="Oval" color="#d3d3d3" height={100} width={100} />
-        </div>
-      )}
 
       {props.routeParams.match &&
       props.routeParams.match.params.type === "try" ? (
@@ -181,7 +183,7 @@ const VideoPlayer = (props) => {
             key="3"
             data={grid}
             type="try"
-            loaded={triesLoaded}
+            loaded={true}
           />
         </React.Fragment>
       ) : (
@@ -244,15 +246,16 @@ const VideoPlayer = (props) => {
                 key="9"
                 data={tries}
                 type="try"
-                loaded={triesLoaded}
+                loaded={true}
               />
             )}
+
             <VideoGrid
               title="Match History"
               key="4"
               data={grid}
               type="match"
-              loaded={matchesLoaded}
+              loaded={true}
             />
           </React.Fragment>
         )
