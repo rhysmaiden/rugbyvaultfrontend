@@ -41,8 +41,6 @@ const CompareTriesPage = (props) => {
 
     setTryA(jsonData.try_a);
     setTryB(jsonData.try_b);
-
-    console.log(jsonData.try_a);
   };
 
   const try_a_opts = {
@@ -85,101 +83,116 @@ const CompareTriesPage = (props) => {
   };
 
   return (
-    <div
-      className="CompareTries"
-      style={{
-        display: "flex",
-        justifyContent: "space-evenly",
-        flexWrap: "wrap",
-        width: "100%",
-        paddingTop: "20px",
-        alignItems: "center",
-      }}
-    >
-      <div style={{ marginBottom: "10px" }}>
-        <YouTube
-          id="youtube"
-          videoId={
-            tryA &&
-            tryA.video_link.substring(
-              tryA.video_link.lastIndexOf("/") + 1,
-              tryA.video_link.lastIndexOf("?")
-            )
-          }
-          opts={try_b_opts}
-        />
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "space-between",
-          }}
-        >
-          <div>
-            <h3 style={{ marginBottom: "10px" }}>
-              {tryA && tryA.player.name}{" "}
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ marginLeft: "10px" }}
-                onClick={() => chooseWinner(tryA.id)}
-              >
-                Winner
-              </Button>
-            </h3>
-            <p>
-              {tryA &&
-                tryA.match.home_team.team_name +
-                  " vs " +
-                  tryA.match.away_team.team_name}
-            </p>
-            <p>{tryA && tryA.match.date}</p>
+    <React.Fragment>
+      <div
+        className="CompareTries"
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          flexWrap: "wrap",
+          width: "100%",
+          paddingTop: "20px",
+          alignItems: "center",
+        }}
+      >
+        <div style={{ marginBottom: "10px" }}>
+          <YouTube
+            id="youtube"
+            videoId={
+              tryA &&
+              tryA.video_link.substring(
+                tryA.video_link.lastIndexOf("/") + 1,
+                tryA.video_link.lastIndexOf("?")
+              )
+            }
+            opts={try_b_opts}
+          />
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>
+              <h3 style={{ marginBottom: "10px" }}>
+                {tryA && tryA.player.name}{" "}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginLeft: "10px" }}
+                  onClick={() => chooseWinner(tryA.id)}
+                >
+                  Winner
+                </Button>
+              </h3>
+              <p>
+                {tryA &&
+                  tryA.match.home_team.team_name +
+                    " vs " +
+                    tryA.match.away_team.team_name}
+              </p>
+              <p>{tryA && tryA.match.date}</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <YouTube
+            id="youtube"
+            videoId={
+              tryB &&
+              tryB.video_link.substring(
+                tryB.video_link.lastIndexOf("/") + 1,
+                tryB.video_link.lastIndexOf("?")
+              )
+            }
+            opts={try_b_opts}
+          />
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-between",
+            }}
+          >
+            <div>
+              <h3 style={{ marginBottom: "10px" }}>
+                {tryB && tryB.player.name}{" "}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{ marginLeft: "10px" }}
+                  onClick={() => chooseWinner(tryB.id)}
+                >
+                  Winner
+                </Button>
+              </h3>
+              <p>
+                {tryB &&
+                  tryB.match.home_team.team_name +
+                    " vs " +
+                    tryB.match.away_team.team_name}
+              </p>
+              <p>{tryB && tryB.match.date}</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div>
-        <YouTube
-          id="youtube"
-          videoId={
-            tryB &&
-            tryB.video_link.substring(
-              tryB.video_link.lastIndexOf("/") + 1,
-              tryB.video_link.lastIndexOf("?")
-            )
-          }
-          opts={try_b_opts}
-        />
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "space-between",
-          }}
+      <div
+        style={{
+          padding: "20px",
+        }}
+      >
+        <Button
+          variant="contained"
+          onClick={() => (window.location = "tryleaderboard")}
         >
-          <div>
-            <h3 style={{ marginBottom: "10px" }}>
-              {tryB && tryB.player.name}{" "}
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ marginLeft: "10px" }}
-                onClick={() => chooseWinner(tryB.id)}
-              >
-                Winner
-              </Button>
-            </h3>
-            <p>
-              {tryB &&
-                tryB.match.home_team.team_name +
-                  " vs " +
-                  tryB.match.away_team.team_name}
-            </p>
-            <p>{tryB && tryB.match.date}</p>
-          </div>
-        </div>
+          View Leaderboard
+        </Button>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
