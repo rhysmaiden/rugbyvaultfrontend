@@ -65,23 +65,22 @@ const CompareTriesPage = (props) => {
     },
   };
 
-  const sendResult = async (rating) => {
-    // const data = {
-    //   id: props.routeParams.match.params.id,
-    //   rating: rating,
-    // };
-    // setError("");
-    // const url =
-    //   config.get("backend_url") +
-    //   "rate/?type=" +
-    //   props.routeParams.match.params.type;
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
+  const chooseWinner = async (winner) => {
+    console.log(winner);
+    const data = {
+      try_a_id: tryA.id,
+      try_b_id: tryB.id,
+      winner: winner,
+    };
+
+    const url = config.get("backend_url") + "comparetries/";
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   return (
@@ -122,6 +121,7 @@ const CompareTriesPage = (props) => {
                 variant="contained"
                 color="primary"
                 style={{ marginLeft: "10px" }}
+                onClick={() => chooseWinner(tryA.id)}
               >
                 Winner
               </Button>
@@ -163,6 +163,7 @@ const CompareTriesPage = (props) => {
                 variant="contained"
                 color="primary"
                 style={{ marginLeft: "10px" }}
+                onClick={() => chooseWinner(tryB.id)}
               >
                 Winner
               </Button>
