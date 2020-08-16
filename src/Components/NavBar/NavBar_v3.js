@@ -5,18 +5,18 @@ import { teams_in_leagues } from "../../league_data.js";
 import Search from "../Search.js";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 
-const NavBar_v3 = props => {
+const NavBar_v3 = (props) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [dropDownActive, setDropDown] = useState(
     Array(teams_in_leagues.length).fill(false)
   );
 
-  const dropDown = e => {
+  const dropDown = (e) => {
     const index = e.target.getAttribute("value");
 
     var dropdown = [];
-    dropDownActive.map(drop => {
+    dropDownActive.map((drop) => {
       dropdown.push(drop);
     });
 
@@ -55,7 +55,7 @@ const NavBar_v3 = props => {
                     "secondary-links " + (dropDownActive[index] && "active")
                   }
                 >
-                  {league.teams.map(team => (
+                  {league.teams.map((team) => (
                     <li className="secondary-link">
                       <a href={team.link}>{team.name}</a>
                     </li>
@@ -64,6 +64,16 @@ const NavBar_v3 = props => {
               </li>
             </React.Fragment>
           ))}
+          <li className="primary-link">
+            <a href="comparetries">
+              Compare Tries <i class=""></i>
+            </a>
+          </li>
+          <li className="primary-link">
+            <a href="/tryleaderboard">
+              Try Leaderboard <i class=""></i>
+            </a>
+          </li>
         </ul>
       </div>
       <Search className="web-search" />

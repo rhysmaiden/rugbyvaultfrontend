@@ -11,6 +11,8 @@ import Chart from "./Pages/Chart.js";
 import TryProcessingPage from "./Pages/TryProcessingPage.js";
 import MatchesPage from "./Pages/MatchesPage.js";
 import TriesPage from "./Pages/TriesPage.js";
+import CompareTriesPage from "./Pages/CompareTriesPage.js";
+import TryLeaderboardPage from "./Pages/TryLeaderboardPage.js";
 import ReactGa from "react-ga";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -20,7 +22,7 @@ config.set({
   backend_url:
     window.location.hostname == "localhost"
       ? "http://127.0.0.1:8000/"
-      : "https://rhysmaiden.pythonanywhere.com/"
+      : "https://rhysmaiden.pythonanywhere.com/",
 });
 
 const App = () => {
@@ -44,14 +46,14 @@ const App = () => {
     }
   }
 
-  const responseGoogle = response => {};
+  const responseGoogle = (response) => {};
 
-  const login = response => {
+  const login = (response) => {
     setCredentials(response.googleId);
     localStorage.setItem("googleId", response.googleId);
   };
 
-  const logout = response => {
+  const logout = (response) => {
     setCredentials("");
     localStorage.setItem("googleId", undefined);
   };
@@ -69,7 +71,7 @@ const App = () => {
           <Route exact path="/" component={() => <HomePage />} />
           <Route
             path="/video/:type?/:id?"
-            render={routeParams => (
+            render={(routeParams) => (
               <VideoPlayer routeParams={routeParams} googleId={credentials} />
             )}
           />
@@ -79,6 +81,8 @@ const App = () => {
           <Route path="/tryprocessing/:id?" component={TryProcessingPage} />
           <Route path="/matches" component={MatchesPage} />
           <Route path="/tries" component={TriesPage} />
+          <Route path="/comparetries" component={CompareTriesPage} />
+          <Route path="/tryleaderboard" component={TryLeaderboardPage} />
         </Router>
       </div>
     </React.Fragment>
