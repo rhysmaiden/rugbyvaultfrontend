@@ -12,6 +12,7 @@ import TryProcessingPage from "./Pages/TryProcessingPage.js";
 import MatchesPage from "./Pages/MatchesPage.js";
 import TriesPage from "./Pages/TriesPage.js";
 import CompareTriesPage from "./Pages/CompareTriesPage.js";
+import TryLeaderboardPage from "./Pages/TryLeaderboardPage.js";
 import ReactGa from "react-ga";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -81,6 +82,7 @@ const App = () => {
           <Route path="/matches" component={MatchesPage} />
           <Route path="/tries" component={TriesPage} />
           <Route path="/comparetries" component={CompareTriesPage} />
+          <Route path="/tryleaderboard" component={TryLeaderboardPage} />
         </Router>
       </div>
     </React.Fragment>
