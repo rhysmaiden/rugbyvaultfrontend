@@ -66,7 +66,6 @@ const CompareTriesPage = (props) => {
   };
 
   const chooseWinner = async (winner) => {
-    console.log(winner);
     const data = {
       try_a_id: tryA.id,
       try_b_id: tryB.id,
@@ -81,6 +80,8 @@ const CompareTriesPage = (props) => {
         "Content-Type": "application/json",
       },
     });
+
+    getTries();
   };
 
   return (
