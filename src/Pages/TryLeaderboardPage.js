@@ -82,6 +82,7 @@ const TryLeaderboardPage = (props) => {
               <StyledTableCell align="left">Player</StyledTableCell>
               <StyledTableCell align="left">Match</StyledTableCell>
               <StyledTableCell align="left">Date</StyledTableCell>
+              <StyledTableCell align="left">Link</StyledTableCell>
               <StyledTableCell align="left">Elo Rating</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -100,6 +101,7 @@ const TryLeaderboardPage = (props) => {
                     row.match.away_team.team_name}
                 </StyledTableCell>
                 <StyledTableCell align="left">{row.match.date}</StyledTableCell>
+                <StyledTableCell align="left">{row.video_link}</StyledTableCell>
                 <StyledTableCell align="left">{row.elo_rating}</StyledTableCell>
               </StyledTableRow>
             ))}
