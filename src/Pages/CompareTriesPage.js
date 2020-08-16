@@ -46,7 +46,7 @@ const CompareTriesPage = (props) => {
   };
 
   const try_a_opts = {
-    maxWidth: 500,
+    maxWidth: 100,
     width: window.innerWidth / 2 - 100,
     playerVars: {
       autoplay: 0,
@@ -56,7 +56,7 @@ const CompareTriesPage = (props) => {
   };
 
   const try_b_opts = {
-    maxWidth: 500,
+    maxWidth: 100,
     width: window.innerWidth / 2 - 100,
     playerVars: {
       autoplay: 0,
@@ -96,7 +96,7 @@ const CompareTriesPage = (props) => {
         alignItems: "center",
       }}
     >
-      <div>
+      <div style={{ marginBottom: "10px" }}>
         <YouTube
           id="youtube"
           videoId={
