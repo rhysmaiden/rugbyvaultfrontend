@@ -31,6 +31,8 @@ const CompareTriesPage = (props) => {
       .split("end=")[1]
       .split(";")[0];
 
+    console.log(jsonData.try_a.start, jsonData.try_a.end);
+
     jsonData.try_b.start = jsonData.try_b.video_link
       .split("start=")[1]
       .split("&")[0];
@@ -105,7 +107,7 @@ const CompareTriesPage = (props) => {
                 tryA.video_link.lastIndexOf("?")
               )
             }
-            opts={try_b_opts}
+            opts={try_a_opts}
           />
           <div
             style={{
