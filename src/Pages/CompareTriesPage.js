@@ -5,10 +5,13 @@ import config from "react-global-configuration";
 import Loader from "react-loader-spinner";
 import YouTube from "react-youtube";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const CompareTriesPage = (props) => {
   const [tryA, setTryA] = useState(null);
   const [tryB, setTryB] = useState(null);
+  const [isSavingLeft, setIsSavingLeft] = useState(false);
+  const [isSavingRight, setIsSavingRight] = useState(false);
 
   useEffect(() => {
     getTries();
@@ -31,8 +34,6 @@ const CompareTriesPage = (props) => {
       .split("end=")[1]
       .split(";")[0];
 
-    console.log(jsonData.try_a.start, jsonData.try_a.end);
-
     jsonData.try_b.start = jsonData.try_b.video_link
       .split("start=")[1]
       .split("&")[0];
@@ -43,6 +44,9 @@ const CompareTriesPage = (props) => {
 
     setTryA(jsonData.try_a);
     setTryB(jsonData.try_b);
+
+    setIsSavingLeft(false);
+    setIsSavingRight(false);
   };
 
   const try_a_opts = {
@@ -65,7 +69,9 @@ const CompareTriesPage = (props) => {
     },
   };
 
-  const chooseWinner = async (winner) => {
+  const chooseWinner = async (winner, side) => {
+    side == 0 ? setIsSavingLeft(true) : setIsSavingRight(true);
+
     const data = {
       try_a_id: tryA.id,
       try_b_id: tryB.id,
@@ -73,15 +79,13 @@ const CompareTriesPage = (props) => {
     };
 
     const url = config.get("backend_url") + "comparetries/";
-    const response = await fetch(url, {
+    fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
       },
-    });
-
-    getTries();
+    }).then((res) => {});
   };
 
   return (
@@ -117,17 +121,25 @@ const CompareTriesPage = (props) => {
             }}
           >
             <div>
-              <h3 style={{ marginBottom: "10px" }}>
-                {tryA && tryA.player.name}{" "}
+              <div
+                style={{
+                  marginBottom: "10px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <h3>{tryA && tryA.player.name}</h3>
                 <Button
                   variant="contained"
                   color="primary"
-                  style={{ marginLeft: "10px" }}
-                  onClick={() => chooseWinner(tryA.id)}
+                  style={{ marginLeft: "10px", marginRight: "10px" }}
+                  onClick={() => chooseWinner(tryA.id, 0)}
+                  disabled={isSavingLeft || isSavingRight}
                 >
                   Winner
                 </Button>
-              </h3>
+                {isSavingLeft && <CircularProgress size={25} />}
+              </div>
               <p>
                 {tryA &&
                   tryA.match.home_team.team_name +
@@ -159,17 +171,25 @@ const CompareTriesPage = (props) => {
             }}
           >
             <div>
-              <h3 style={{ marginBottom: "10px" }}>
-                {tryB && tryB.player.name}{" "}
+              <div
+                style={{
+                  marginBottom: "10px",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <h3>{tryB && tryB.player.name}</h3>
                 <Button
                   variant="contained"
                   color="primary"
-                  style={{ marginLeft: "10px" }}
-                  onClick={() => chooseWinner(tryB.id)}
+                  style={{ marginLeft: "10px", marginRight: "10px" }}
+                  onClick={() => chooseWinner(tryB.id, 1)}
+                  disabled={isSavingLeft || isSavingRight}
                 >
                   Winner
                 </Button>
-              </h3>
+                {isSavingRight && <CircularProgress size={25} />}
+              </div>
               <p>
                 {tryB &&
                   tryB.match.home_team.team_name +
