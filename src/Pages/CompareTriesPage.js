@@ -85,7 +85,9 @@ const CompareTriesPage = (props) => {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then((res) => {});
+    }).then((res) => {
+      getTries();
+    });
   };
 
   return (
