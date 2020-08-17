@@ -67,7 +67,6 @@ const TryLeaderboardPage = (props) => {
 
     const jsonData = await response.json();
 
-    console.log(jsonData);
     setTries(jsonData.tries);
   };
 
@@ -101,7 +100,9 @@ const TryLeaderboardPage = (props) => {
                     row.match.away_team.team_name}
                 </StyledTableCell>
                 <StyledTableCell align="left">{row.match.date}</StyledTableCell>
-                <StyledTableCell align="left">{row.video_link}</StyledTableCell>
+                <StyledTableCell align="left">
+                  <a href={`/video/try/${row.id}`}>Watch</a>
+                </StyledTableCell>
                 <StyledTableCell align="left">{row.elo_rating}</StyledTableCell>
               </StyledTableRow>
             ))}
