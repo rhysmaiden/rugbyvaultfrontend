@@ -12,6 +12,7 @@ import TryProcessingPage from "./Pages/TryProcessingPage.js";
 import MatchesPage from "./Pages/MatchesPage.js";
 import TriesPage from "./Pages/TriesPage.js";
 import CompareTriesPage from "./Pages/CompareTriesPage.js";
+import CompareTriesNZPage from "./Pages/CompareTriesNZPage.js";
 import TryLeaderboardPage from "./Pages/TryLeaderboardPage.js";
 import ReactGa from "react-ga";
 
@@ -82,6 +83,7 @@ const App = () => {
           <Route path="/matches" component={MatchesPage} />
           <Route path="/tries" component={TriesPage} />
           <Route path="/comparetries" component={CompareTriesPage} />
+          <Route path="/comparetriesnz" component={CompareTriesNZPage} />
           <Route path="/tryleaderboard" component={TryLeaderboardPage} />
         </Router>
       </div>
