@@ -12,16 +12,26 @@ const VideoGrid = (props) => {
   const animation = useSpring({ opacity: 1, from: { opacity: 1 } });
 
   useEffect(() => {
-    console.log("Gets data");
-    console.log(props.data);
     setVideos(props.data);
   }, [props]);
 
-  return (
+  return !props.loaded ? (
+    <div
+      style={{
+        width: "100%",
+        height: "500px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Loader type="Oval" color="#d3d3d3" height={100} width={100} />
+    </div>
+  ) : (
     <div className="VideoGrid">
       <p>{props.total}</p>
       <div className="Grid">
-        {props.loaded ? (
+        {true ? (
           videos.map((video) =>
             props.type === "match" ? (
               <VideoBox
@@ -65,16 +75,16 @@ const VideoGrid = (props) => {
           </div>
         )}
       </div>
-      <div className="Pagination">
-        {props.pageCount && (
+      {props.pageCount && (
+        <div className="Pagination">
           <ReactPaginate
             pageCount={props.pageCount}
             pageRangeDisplayed={2}
             marginPagesDisplayed={2}
             onPageChange={props.changePage}
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
